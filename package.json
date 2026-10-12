@@ -9,7 +9,8 @@
     "node": ">=22.6"
   },
   "scripts": {
-    "dev": "npm run content:build -- --include-fixtures && vite",
+    "dev": "npm run content:build && vite",
+    "dev:demo": "npm run content:build -- --include-fixtures && vite",
     "build": "npm run content:build && tsc -b && vite build",
     "preview": "vite preview",
     "typecheck": "tsc -b",

@@ -29,7 +29,7 @@ code, the quality bar and the bilingual rules. The examples in
 
    Errors (`✗ file › field: problem`) block; warnings (`!`) usually mean a
    weaker item. Fix the content, never the validator.
-4. **Build and play it:** `npm run dev` (fixtures included) or
+4. **Build and play it:** `npm run dev`, `npm run dev:demo` (fixtures included) or
    `DOJO_CONTENT_DIR=<dir> npm run dev`, then run a lesson on a phone viewport.
 
 ## Rubrics (explain, choose-design rationale, case stages)

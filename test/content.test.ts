@@ -295,7 +295,8 @@ test("content:build writes a content-addressed bundle with generated predict ans
     execFileSync(process.execPath, [...nodeArgs, "scripts/build-content.ts", "--include-fixtures", "--out", out], { cwd: repoRoot, stdio: "pipe" });
     const pointer = JSON.parse(readFileSync(path.join(out, "current.json"), "utf8"));
     assert.match(pointer.hash, /^[0-9a-f]{12}$/);
-    assert.deepEqual(pointer.series.map((s: { id: string }) => s.id).sort(), ["_demo", "_sample"]);
+    // Fixture series are all built; production series in content/ may sit beside them.
+    assert.deepEqual(pointer.series.map((s: { id: string }) => s.id).filter((id: string) => id.startsWith("_")).sort(), ["_demo", "_sample"]);
     const manifest = JSON.parse(readFileSync(path.join(out, pointer.hash, "series", "_sample", "manifest.json"), "utf8"));
     assert.equal(manifest.contentHash, pointer.hash);
     assert.equal(manifest.series.id, "_sample");
@@ -309,13 +310,22 @@ test("content:build writes a content-addressed bundle with generated predict ans
       assert.equal(predict.answer.options[predict.answer.correct], "[('a', 3), ('b', 2), ('c', 1)]\naaa");
     }
     for (const item of bundle.items) assert.ok(parseDojoItem(item).ok, item.id);
+    // choose-design options ship shuffled: same options, never in authored order.
+    const demo = JSON.parse(readFileSync(path.join(out, pointer.hash, "series", "_demo", "units", "u-eval-basics.json"), "utf8")) as DojoUnitBundle;
+    const authored = JSON.parse(readFileSync(path.join(repoRoot, "content/series/_demo/units/u-eval-basics/choose-first-question/item.json"), "utf8"));
+    const shippedChoice = demo.items.find((i) => i.id === "dj-_demo-demo-choose-first-question") as Extract<DojoItem, { type: "choose-design" }>;
+    const authoredIds = authored.options.map((o: { id: string }) => o.id);
+    const shippedIds = shippedChoice.options.map((o) => o.id);
+    assert.deepEqual([...shippedIds].sort(), [...authoredIds].sort());
+    assert.notDeepEqual(shippedIds, authoredIds);
     // Validator-only data never ships.
     const raw = readFileSync(path.join(out, pointer.hash, "series", "_sample", "units", "_sample.json"), "utf8");
     assert.doesNotMatch(raw, /"wrong"|"distractors":\["\[/);
-    // Without --include-fixtures nothing ships, and the app says so.
+    // Without --include-fixtures no fixture series ships.
     const empty = mkdtempSync(path.join(os.tmpdir(), "dojo-build-empty-"));
     execFileSync(process.execPath, [...nodeArgs, "scripts/build-content.ts", "--out", empty], { cwd: repoRoot, stdio: "pipe" });
-    assert.deepEqual(JSON.parse(readFileSync(path.join(empty, "current.json"), "utf8")).series, []);
+    const shipped = JSON.parse(readFileSync(path.join(empty, "current.json"), "utf8")).series as { id: string }[];
+    assert.deepEqual(shipped.filter((s) => s.id.startsWith("_")), []);
     rmSync(empty, { recursive: true, force: true });
   } finally {
     rmSync(out, { recursive: true, force: true });

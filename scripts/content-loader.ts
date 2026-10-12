@@ -398,8 +398,11 @@ export async function loadItemDir(itemDir: string, unit: string): Promise<{ raw:
         },
         extras,
       };
-    case "choose-design":
-      return { raw: base, extras };
+    case "choose-design": {
+      // The player shows options in bundle order; shuffle so the authored order never leaks the answer.
+      const options = Array.isArray(authored.options) ? stableShuffle(authored.options as unknown[], `${id}:options`) : authored.options;
+      return { raw: { ...base, options }, extras };
+    }
   }
 }
 

@@ -55,7 +55,7 @@ first page stays light on phones.
 ## Verify
 
 1. `npm test` (the protocol types are shared with the validator).
-2. Run the `_sample` fixture series in `npm run dev`: implement-ttl-cache must
+2. Run the `_sample` fixture series in `npm run dev:demo`: implement-ttl-cache must
    fail on the starter, pass on the reference solution, and show per-test
    results; a deliberately infinite loop must end as a timeout, not a hang.
 3. Check the runner status story in Storybook (Dojo / Runtime and Tests).

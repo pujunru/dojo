@@ -13,7 +13,7 @@ npm run content:validate                      # every check below, every series;
 npm run content:validate -- --series evals    # one series (add --unit <id> for one unit)
 npm run content:validate -- --coverage        # also list KCs that still lack items
 npm run content:build                         # bundle → public/content/<hash>/series/<id>/
-npm run dev                                   # builds with fixtures and starts the app
+npm run dev                                   # builds and starts the app (dev:demo adds the fixtures)
 ```
 
 Content lives in `content/series/<id>/` by default. Point `DOJO_CONTENT_DIR`
@@ -66,7 +66,7 @@ only reference its own series' graph.
 Two fixture series show the format end to end: `series/_demo/` (eval design:
 choose-design, explain and staged cases, all runtime `none`) and
 `series/_sample/` (one item of every code type, validated on CPython). They are
-built only with `--include-fixtures` (`npm run dev` and `npm run build:demo`
+built only with `--include-fixtures` (`npm run dev:demo` and `npm run build:demo`
 pass it).
 
 ## 1. Where things go
@@ -363,7 +363,9 @@ reveals the order. `module` defaults to the solution's file name.
 ### choose-design — "which approach?"
 
 Everything in item.json: `scenario` (L10n), `options: [{ "id", "text", "correct",
-"why" }]`, `multi`. Every option, including the right one, needs a `why`.
+"why" }]`, `multi`. Every option, including the right one, needs a `why`. Write options
+in any order: the build shuffles them by item id (never leaving the authored
+order), and grading goes by option id.
 Wrong options should be wrong for a *reason a candidate could hold*, not absurd.
 
 ### implement — "write it, hidden tests decide"

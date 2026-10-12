@@ -25,7 +25,8 @@ examples, not a curriculum.
 
 ```sh
 npm install
-npm run dev          # builds the example content and starts the app on :5173
+npm run dev:demo     # builds the example series and starts the app on :5173
+npm run dev          # the same, with only your own series under content/
 ```
 
 Open it on a phone, or with your browser's device toolbar. Other commands:
