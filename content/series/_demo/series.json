@@ -1,0 +1,24 @@
+{
+  "id": "_demo",
+  "order": 90,
+  "title_zh": "示例：ML 评测端到端",
+  "title_en": "Example: ML evals end to end",
+  "description_zh": "示例系列（fixture，只在开发构建里出现）：设计选择、讲解题和分段案例，全部自评，不运行代码。",
+  "description_en": "An example series (a fixture, shown in development builds only): design choices, explanations and staged cases, all self-checked, no code execution.",
+  "archetypes": [
+    "eval-design"
+  ],
+  "runtimes": [
+    "none"
+  ],
+  "scheduler": {
+    "rungOf": {
+      "choose-design": 1,
+      "explain": 2
+    },
+    "gainOf": {
+      "explain": 1.2
+    },
+    "capBelowProductionDays": 10
+  }
+}

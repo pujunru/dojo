@@ -1,0 +1,42 @@
+{
+  "id": "dj-sample-adv-review-payment-scheduler",
+  "version": 1,
+  "type": "review",
+  "lesson": "_adv-l1",
+  "kcs": [{ "id": "_adv-scheduled-events", "weight": 1 }, { "id": "_adv-review-hygiene", "weight": 0.5 }],
+  "archetype": "scheduling-ledger",
+  "skin": "payments",
+  "difficulty": 2,
+  "estSeconds": 360,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "同事提交了 `run_due()`：执行所有已到期的定时付款。逐行审查，标出有问题的行，并给每条意见选严重程度和类别。",
+    "en-US": "A teammate added `run_due()`: run every scheduled payment that has fallen due. Review it line by line, mark the lines with problems, and give each finding a severity and a category."
+  },
+  "explanation": {
+    "zh-CN": "三处问题：`due_at >= now` 让恰好到期的付款被跳过（应为 `>`）；在 `for` 循环里 `remove` 当前列表会跳过下一个元素；`except Exception: pass` 吞掉了失败，付款既不在队列里也没执行。",
+    "en-US": "Three problems: `due_at >= now` skips a payment due exactly now (it should be `>`); calling `remove` on the list being iterated skips the next element; `except Exception: pass` swallows the failure, so the payment is neither pending nor executed."
+  },
+  "hints": [
+    { "zh-CN": "一笔付款恰好在 `now` 到期，会执行吗？", "en-US": "Does a payment due exactly at `now` run?" },
+    { "zh-CN": "边遍历边删除列表元素时会发生什么？", "en-US": "What happens when you remove from a list while iterating over it?" }
+  ],
+  "issues": [
+    {
+      "id": "due-boundary", "path": "payments.py", "line": 16, "kcs": ["_adv-scheduled-events"],
+      "severity": "major", "category": "correctness",
+      "description": { "zh-CN": "`>=` 让恰好到期的付款被跳过，应改为 `>`。", "en-US": "`>=` skips a payment that is due exactly now; it should be `>`." }
+    },
+    {
+      "id": "mutate-while-iterating", "path": "payments.py", "line": 18, "kcs": ["_adv-review-hygiene", "_adv-scheduled-events"],
+      "severity": "blocker", "category": "state",
+      "description": { "zh-CN": "在遍历中 `remove` 会跳过下一笔付款；先收集到期项或重建列表。", "en-US": "Removing during iteration skips the next payment; collect the due items first or rebuild the list." }
+    },
+    {
+      "id": "swallowed-error", "path": "payments.py", "line": 21, "kcs": ["_adv-review-hygiene"],
+      "severity": "major", "category": "error-handling",
+      "description": { "zh-CN": "吞掉异常后付款就消失了：既没执行也不在队列里。", "en-US": "Swallowing the error loses the payment: it is neither executed nor still pending." }
+    }
+  ],
+  "tolerance": 1
+}

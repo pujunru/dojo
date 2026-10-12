@@ -1,0 +1,11 @@
+{
+  "id": "_sample",
+  "order": 91,
+  "title_zh": "示例：Python 代码题",
+  "title_en": "Example: Python code items",
+  "description_zh": "示例系列（fixture，只在开发构建里出现）：每种代码题型各一道。这些题要靠代码运行器判分；没有运行器时，只有静态判分的题会出现。",
+  "description_en": "An example series (a fixture, shown in development builds only): one item of each code type. They are graded by a code runner; without one, only the statically graded items play.",
+  "archetypes": ["python-core", "stateful-time", "persistence", "scheduling-ledger"],
+  "runtimes": ["none", "sandbox:python"],
+  "sandboxRuntime": "sandbox:python"
+}

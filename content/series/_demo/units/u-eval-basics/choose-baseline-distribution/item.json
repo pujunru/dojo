@@ -1,0 +1,74 @@
+{
+  "id": "dj-demo-choose-baseline-distribution",
+  "version": 1,
+  "type": "choose-design",
+  "lesson": "l-eval-basics-1",
+  "kcs": [
+    {
+      "id": "eval-clarify",
+      "weight": 1
+    }
+  ],
+  "archetype": "eval-design",
+  "skin": "search-ranker",
+  "difficulty": 2,
+  "estSeconds": 75,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "要比较新旧两个排序模型，评测集应该从哪里来？",
+    "en-US": "Comparing an old and a new ranking model: where should the eval set come from?"
+  },
+  "scenario": {
+    "zh-CN": "决策是全量切换。",
+    "en-US": "The decision is a full rollout."
+  },
+  "options": [
+    {
+      "id": "traffic",
+      "text": {
+        "zh-CN": "从近期真实流量中分层抽样",
+        "en-US": "A stratified sample of recent real traffic"
+      },
+      "correct": true,
+      "why": {
+        "zh-CN": "全量切换影响的是真实流量，评测分布要贴近它，分层是为了长尾不被淹没。",
+        "en-US": "A full rollout affects real traffic, so the eval distribution should match it; stratifying keeps the long tail visible."
+      }
+    },
+    {
+      "id": "hard",
+      "text": {
+        "zh-CN": "只挑模型最难的样本",
+        "en-US": "Only the hardest examples"
+      },
+      "correct": false,
+      "why": {
+        "zh-CN": "难例适合诊断，不适合做上线决策，会高估差距。",
+        "en-US": "Hard cases diagnose; for a rollout decision they overstate the gap."
+      }
+    },
+    {
+      "id": "synthetic",
+      "text": {
+        "zh-CN": "全部用合成数据",
+        "en-US": "Entirely synthetic data"
+      },
+      "correct": false,
+      "why": {
+        "zh-CN": "合成数据能补覆盖，但不能代表真实分布。",
+        "en-US": "Synthetic data fills coverage gaps but does not represent the real distribution."
+      }
+    }
+  ],
+  "multi": false,
+  "explanation": {
+    "zh-CN": "决策决定分布：上线决策用真实流量。",
+    "en-US": "The decision sets the distribution: rollout decisions use real traffic."
+  },
+  "hints": [
+    {
+      "zh-CN": "切换后模型面对的是什么输入？",
+      "en-US": "What inputs will the model face after the switch?"
+    }
+  ]
+}

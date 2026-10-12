@@ -1,0 +1,64 @@
+{
+  "name": "dojo",
+  "version": "0.1.0",
+  "private": false,
+  "description": "A Duolingo-style practice engine for interview skills: spaced repetition, retrieval practice and a ZPD session composer, as a mobile web app. Bring your own content.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "scripts": {
+    "dev": "npm run content:build -- --include-fixtures && vite",
+    "build": "npm run content:build && tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b",
+    "test": "node --experimental-strip-types --no-warnings=ExperimentalWarning --import ./scripts/ts-resolve-register.mjs --test \"test/*.test.ts\"",
+    "content:build": "node --experimental-strip-types --no-warnings=ExperimentalWarning --import ./scripts/ts-resolve-register.mjs scripts/build-content.ts",
+    "content:validate": "node --experimental-strip-types --no-warnings=ExperimentalWarning --import ./scripts/ts-resolve-register.mjs scripts/validate-content.ts",
+    "check:i18n": "node --experimental-strip-types --no-warnings=ExperimentalWarning --import ./scripts/ts-resolve-register.mjs scripts/check-i18n.ts",
+    "storybook": "storybook dev -p 6006 --no-open",
+    "build-storybook": "storybook build",
+    "build:demo": "npm run content:build -- --include-fixtures && tsc -b && vite build"
+  },
+  "dependencies": {
+    "@codemirror/commands": "6.11.0",
+    "@codemirror/lang-markdown": "6.5.2",
+    "@codemirror/lang-python": "6.2.1",
+    "@codemirror/language": "6.12.4",
+    "@codemirror/state": "6.7.2",
+    "@codemirror/view": "6.43.10",
+    "@lezer/highlight": "1.2.3",
+    "@radix-ui/react-select": "2.3.7",
+    "@radix-ui/react-slot": "1.2.3",
+    "@radix-ui/react-tabs": "1.1.21",
+    "@radix-ui/react-toggle-group": "1.1.19",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "lucide-react": "1.29.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
+    "react-markdown": "10.1.0",
+    "remark-gfm": "4.0.1",
+    "tailwind-merge": "3.3.1",
+    "use-intl": "4.13.7"
+  },
+  "devDependencies": {
+    "@storybook/addon-a11y": "10.5.10",
+    "@storybook/addon-docs": "10.5.10",
+    "@storybook/react-vite": "10.5.10",
+    "@tailwindcss/vite": "4.3.3",
+    "@types/node": "22.15.3",
+    "@types/react": "19.0.2",
+    "@types/react-dom": "19.0.2",
+    "@vitejs/plugin-react": "4.7.0",
+    "storybook": "10.5.10",
+    "tailwindcss": "4.3.3",
+    "typescript": "5.7.2",
+    "vite": "6.4.3"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "esbuild@0.25.12": true
+  }
+}

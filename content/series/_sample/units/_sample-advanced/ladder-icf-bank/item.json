@@ -1,0 +1,63 @@
+{
+  "id": "dj-sample-adv-ladder-icf-bank",
+  "version": 1,
+  "type": "ladder",
+  "lesson": "_adv-l1",
+  "kcs": [
+    { "id": "_adv-bank-ledger", "weight": 1 },
+    { "id": "_adv-top-k-ties", "weight": 0.5 },
+    { "id": "_adv-scheduled-events", "weight": 0.5 }
+  ],
+  "archetype": "scheduling-ledger",
+  "skin": "bank",
+  "difficulty": 3,
+  "estSeconds": 2100,
+  "runtime": "sandbox",
+  "checkpointFor": "_sample-advanced",
+  "prompt": {
+    "zh-CN": "ICF 风格的三级小题：一个内存银行，每级在上一级的代码上继续写。每级有自己的计时；超时可以继续，但会被记录。下一级的题面在本级通过或跳过后才出现。",
+    "en-US": "An ICF-style three-level mini question: an in-memory bank, each level built on your code from the one before. Every level has its own timer; you may run over, but overtime is recorded. The next level's prompt appears only after this one passes or is skipped."
+  },
+  "explanation": {
+    "zh-CN": "L1 的关键是失败的转账不改任何状态；L2 的排序键是 `(-outgoing, account_id)`，零支出账户也要出现；L3 在每个公开操作开头先结算到期付款，按 `(due, 创建序)` 处理，余额不足就跳过——所以在到期时刻取消已经太晚。",
+    "en-US": "L1 hinges on a failed transfer changing nothing; L2 sorts by `(-outgoing, account_id)` and still lists zero-spend accounts; L3 settles due payments at the start of every public operation, in `(due, creation order)`, skipping any that cannot be funded — which is why cancelling at the due time is already too late."
+  },
+  "hints": [
+    { "zh-CN": "转账先检查完所有失败条件，再改余额。", "en-US": "Check every failure condition before touching any balance." },
+    { "zh-CN": "单独记一份每个账户的累计支出，别从余额反推。", "en-US": "Keep a running outgoing total per account; don't derive it from balances." },
+    { "zh-CN": "写一个 `_settle()`，每个公开方法第一行调用它。", "en-US": "Write a `_settle()` and call it first thing in every public method." }
+  ],
+  "levels": [
+    {
+      "id": "l1",
+      "title": { "zh-CN": "账户、存款与转账", "en-US": "Accounts, deposits and transfers" },
+      "prompt": {
+        "zh-CN": "在 `bank.py` 里实现 `Bank`：\n\n- `create_account(account_id) -> bool`：已存在返回 `False`。\n- `deposit(account_id, amount) -> int | None`：返回新余额；账户不存在返回 `None`。\n- `transfer(source_id, target_id, amount) -> int | None`：成功返回转出方新余额；同一账户、任一账户不存在或余额不足时返回 `None`，且**不改变任何余额**。",
+        "en-US": "Implement `Bank` in `bank.py`:\n\n- `create_account(account_id) -> bool`: `False` if it already exists.\n- `deposit(account_id, amount) -> int | None`: the new balance; `None` for an unknown account.\n- `transfer(source_id, target_id, amount) -> int | None`: the source's new balance on success; `None` when both ids are the same, either account is unknown, or funds are short — and then **no balance changes**."
+      },
+      "timeboxMin": 10,
+      "kcs": ["_adv-bank-ledger"]
+    },
+    {
+      "id": "l2",
+      "title": { "zh-CN": "支出排行", "en-US": "Top spenders" },
+      "prompt": {
+        "zh-CN": "加上 `top_spenders(n) -> list[str]`：返回前 `n` 个账户，格式 `\"<id>(<累计转出>)\"`。按累计转出降序，并列时按账户 id 升序；没转出过的账户算 0，也要参与排行；`n` 大于账户数时返回全部。转入和失败的转账不计。",
+        "en-US": "Add `top_spenders(n) -> list[str]`: the first `n` accounts as `\"<id>(<total outgoing>)\"`, by total outgoing descending, ties by account id ascending. Accounts that never sent money count as 0 and still rank; if `n` exceeds the number of accounts, return them all. Incoming money and failed transfers do not count."
+      },
+      "timeboxMin": 10,
+      "kcs": ["_adv-top-k-ties", "_adv-bank-ledger"]
+    },
+    {
+      "id": "l3",
+      "title": { "zh-CN": "定时付款", "en-US": "Scheduled payments" },
+      "prompt": {
+        "zh-CN": "加上定时付款，时间用 `time.time()` 读取（测试会推进假时钟）：\n\n- `schedule_payment(account_id, amount, delay) -> str | None`：返回 `\"payment1\"`、`\"payment2\"`…（全局计数）；账户不存在返回 `None`。付款在 `now + delay` 到期。\n- 每个公开操作**开始前**先执行所有已到期（`due <= now`）的付款：先按到期时间，再按创建顺序；余额不足的付款直接跳过。执行成功的付款计入累计转出。\n- `cancel_payment(account_id, payment_id) -> bool`：仅当付款仍待执行且属于该账户时取消并返回 `True`。",
+        "en-US": "Add scheduled payments; read time with `time.time()` (the tests advance a fake clock):\n\n- `schedule_payment(account_id, amount, delay) -> str | None`: returns `\"payment1\"`, `\"payment2\"`, … (one global counter); `None` for an unknown account. The payment falls due at `now + delay`.\n- **Before** every public operation, run every due payment (`due <= now`): by due time, then creation order; a payment the balance cannot cover is skipped. Executed payments count as outgoing.\n- `cancel_payment(account_id, payment_id) -> bool`: cancels and returns `True` only if the payment is still pending and belongs to that account."
+      },
+      "timeboxMin": 15,
+      "kcs": ["_adv-scheduled-events", "_adv-bank-ledger", "_adv-top-k-ties"]
+    }
+  ],
+  "options": { "seed": 0, "fakeClock": true, "stepBudget": 200000, "wallMs": 4000, "asyncTests": false }
+}

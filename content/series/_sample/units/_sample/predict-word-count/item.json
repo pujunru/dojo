@@ -1,0 +1,33 @@
+{
+  "id": "dj-sample-predict-word-count",
+  "version": 1,
+  "type": "predict",
+  "lesson": "_sample-l1",
+  "kcs": [{ "id": "_sample-dict-count", "weight": 1 }, { "id": "_sample-sort-key", "weight": 0.5 }],
+  "archetype": "python-core",
+  "skin": "word-count",
+  "difficulty": 1,
+  "estSeconds": 40,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "这段程序会打印什么？",
+    "en-US": "What does this program print?"
+  },
+  "explanation": {
+    "zh-CN": "`counts.get(word, 0) + 1` 统计出 a=3、b=2、c=1。排序键 `(-count, word)` 让次数多的在前、同次数按字母升序，所以第一名是 `('a', 3)`，`'a' * 3` 是 `aaa`。",
+    "en-US": "`counts.get(word, 0) + 1` counts a=3, b=2, c=1. The key `(-count, word)` puts higher counts first and breaks ties alphabetically, so the leader is `('a', 3)` and `'a' * 3` is `aaa`."
+  },
+  "hints": [
+    { "zh-CN": "先手算每个单词出现几次。", "en-US": "Count each word by hand first." }
+  ],
+  "files": "code",
+  "entry": "main.py",
+  "answer": {
+    "mode": "choice",
+    "distractors": [
+      "[('c', 1), ('b', 2), ('a', 3)]\na",
+      "[('a', 3), ('b', 2), ('c', 1)]\n3",
+      "[('b', 2), ('a', 3), ('c', 1)]\nbb"
+    ]
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "id": "dj-sample-choose-ttl-expiry",
+  "version": 1,
+  "type": "choose-design",
+  "lesson": "_sample-l1",
+  "kcs": [{ "id": "_sample-ttl-boundary", "weight": 1 }],
+  "archetype": "stateful-time",
+  "skin": "session-cache",
+  "difficulty": 2,
+  "estSeconds": 60,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "面试官要一个单进程、带 TTL 的内存 KV，30 分钟内写完。过期条目怎么处理最合适？",
+    "en-US": "The interviewer wants a single-process in-memory KV store with TTL, written in 30 minutes. How should expired entries be handled?"
+  },
+  "scenario": {
+    "zh-CN": "读多写少，键数量在十万以内，测试会用假时钟推进时间。",
+    "en-US": "Read-heavy, under 100k keys, and the tests advance a fake clock."
+  },
+  "options": [
+    {
+      "id": "lazy",
+      "text": { "zh-CN": "读时惰性检查并删除过期条目", "en-US": "Check and evict lazily on read" },
+      "correct": true,
+      "why": { "zh-CN": "实现最简单、完全确定，假时钟一推进，下一次读就能看到结果。", "en-US": "Simplest and fully deterministic: the next read after the fake clock advances sees the expiry." }
+    },
+    {
+      "id": "thread",
+      "text": { "zh-CN": "每个键起一个定时线程到期删除", "en-US": "Start a timer thread per key that deletes it" },
+      "correct": false,
+      "why": { "zh-CN": "线程数随键数增长，且真实计时器不受假时钟控制，测试会变得不确定。", "en-US": "Threads grow with keys, and real timers ignore the fake clock, so tests become nondeterministic." }
+    },
+    {
+      "id": "never",
+      "text": { "zh-CN": "不删除，靠进程重启清理", "en-US": "Never evict; rely on process restarts" },
+      "correct": false,
+      "why": { "zh-CN": "过期的值仍会被读到，直接违反 TTL 契约。", "en-US": "Expired values stay readable, which breaks the TTL contract outright." }
+    }
+  ],
+  "multi": false,
+  "explanation": {
+    "zh-CN": "面试场景优先“正确且确定”。惰性过期满足契约；如果追问内存占用，再补一个按写入次数触发的批量清扫。",
+    "en-US": "In an interview, correct and deterministic wins. Lazy expiry meets the contract; if asked about memory, add a sweep triggered every N writes."
+  },
+  "hints": [
+    { "zh-CN": "哪种方案在假时钟下依然确定？", "en-US": "Which option stays deterministic under a fake clock?" }
+  ]
+}

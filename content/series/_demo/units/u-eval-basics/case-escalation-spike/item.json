@@ -1,0 +1,133 @@
+{
+  "id": "dj-demo-case-escalation-spike",
+  "version": 1,
+  "type": "case",
+  "lesson": "l-eval-basics-1",
+  "kcs": [
+    {
+      "id": "eval-clarify",
+      "weight": 1
+    },
+    {
+      "id": "eval-metric-choice",
+      "weight": 0.5
+    }
+  ],
+  "archetype": "eval-design",
+  "skin": "support-agent",
+  "difficulty": 3,
+  "estSeconds": 600,
+  "runtime": "none",
+  "checkpointFor": "u-eval-basics",
+  "prompt": {
+    "zh-CN": "分段案例：每段答完才会出现下一段追问。",
+    "en-US": "Staged case: each follow-up appears once you answer the stage before."
+  },
+  "explanation": {
+    "zh-CN": "先问决策和基线，再查分布变化，最后谈门禁。",
+    "en-US": "Ask about the decision and baseline, then check for distribution shift."
+  },
+  "hints": [],
+  "scenario": {
+    "zh-CN": "你负责一个客服智能体的评测。团队想下周把新模型换上线，问你怎么评。",
+    "en-US": "You own evals for a support agent. The team wants to ship a new model next week and asks how you would evaluate it."
+  },
+  "stages": [
+    {
+      "id": "plan",
+      "question": {
+        "zh-CN": "给一个评测方案：评什么、和谁比、用什么数据。",
+        "en-US": "Propose an eval plan: what you measure, against what, on which data."
+      },
+      "rubric": {
+        "passAt": 0.7,
+        "criteria": [
+          {
+            "id": "baseline",
+            "kcs": [
+              "eval-clarify"
+            ],
+            "weight": 2,
+            "description": {
+              "zh-CN": "和现网模型在同一份数据上对比，作为基线",
+              "en-US": "Compares against the production model, as the baseline, on the same data"
+            },
+            "mustMention": [
+              "基线",
+              "baseline"
+            ]
+          },
+          {
+            "id": "traffic",
+            "kcs": [
+              "eval-clarify"
+            ],
+            "weight": 1,
+            "description": {
+              "zh-CN": "评测数据来自真实流量的分层抽样",
+              "en-US": "Eval data is a stratified sample of real traffic"
+            }
+          },
+          {
+            "id": "no-bleu",
+            "kcs": [
+              "eval-metric-choice"
+            ],
+            "weight": 1,
+            "description": {
+              "zh-CN": "不拿 BLEU 或困惑度当产品指标",
+              "en-US": "Does not use BLEU or perplexity as the product metric"
+            },
+            "forbidden": [
+              "BLEU",
+              "perplexity",
+              "困惑度"
+            ]
+          }
+        ]
+      },
+      "modelAnswer": {
+        "zh-CN": "目标是决定能否替换现网，所以基线（baseline）是现网模型。从最近两周真实工单分层抽样 800 条，按意图和语言分层，两边同题对比解决率和升级率。",
+        "en-US": "The goal is a replace-or-not decision, so the baseline is the production model (基线). Sample 800 recent real tickets stratified by intent and language, and compare resolution and escalation rates on the same items."
+      }
+    },
+    {
+      "id": "spike",
+      "question": {
+        "zh-CN": "**新约束**：上线灰度一天后，升级到人工的比例一夜翻倍。离线评测是持平的。你先查什么？",
+        "en-US": "**New constraint**: one day into the canary, the escalation rate doubled overnight. The offline eval was flat. What do you check first?"
+      },
+      "rubric": {
+        "passAt": 0.7,
+        "criteria": [
+          {
+            "id": "shift",
+            "kcs": [
+              "eval-clarify"
+            ],
+            "weight": 2,
+            "description": {
+              "zh-CN": "先查线上流量和评测集的分布差异",
+              "en-US": "First checks for a distribution gap between live traffic and the eval set"
+            }
+          },
+          {
+            "id": "slice",
+            "kcs": [
+              "eval-metric-choice"
+            ],
+            "weight": 1,
+            "description": {
+              "zh-CN": "按切片（意图、语言、渠道）看升级率",
+              "en-US": "Breaks escalation down by slice (intent, language, channel)"
+            }
+          }
+        ]
+      },
+      "modelAnswer": {
+        "zh-CN": "离线持平而线上翻倍，最可能是分布变了：先比较灰度流量和评测集在意图、语言、渠道上的占比，再按切片看升级率，找出是哪一块在升。",
+        "en-US": "Flat offline but doubled online most likely means the distribution moved: compare the canary traffic's mix of intents, languages and channels with the eval set, then break escalation down by slice to find which part rose."
+      }
+    }
+  ]
+}

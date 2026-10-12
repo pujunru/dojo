@@ -1,0 +1,72 @@
+{
+  "id": "dj-demo-explain-metric-tradeoff",
+  "version": 1,
+  "type": "explain",
+  "lesson": "l-eval-basics-2",
+  "kcs": [
+    {
+      "id": "eval-metric-choice",
+      "weight": 1
+    }
+  ],
+  "archetype": "eval-design",
+  "skin": "support-triage",
+  "difficulty": 2,
+  "estSeconds": 150,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "用三四句话回答。",
+    "en-US": "Answer in three or four sentences."
+  },
+  "question": {
+    "zh-CN": "什么时候整体准确率会误导上线决策？举一个例子说明你会换成什么指标。",
+    "en-US": "When does overall accuracy mislead a launch decision? Give an example and the metric you would use instead."
+  },
+  "rubric": {
+    "criteria": [
+      {
+        "id": "imbalance",
+        "kcs": [
+          "eval-metric-choice"
+        ],
+        "weight": 2,
+        "description": {
+          "zh-CN": "指出类别不均衡时准确率被大类主导",
+          "en-US": "Says accuracy is dominated by large classes under imbalance"
+        }
+      },
+      {
+        "id": "cost",
+        "kcs": [
+          "eval-metric-choice"
+        ],
+        "weight": 1,
+        "description": {
+          "zh-CN": "指出不同错误代价不同，指标要反映代价",
+          "en-US": "Says errors cost differently and the metric should reflect cost"
+        }
+      },
+      {
+        "id": "example",
+        "kcs": [
+          "eval-metric-choice"
+        ],
+        "weight": 1,
+        "description": {
+          "zh-CN": "给出具体替代指标（代价加权、关键类精确率/召回率等）",
+          "en-US": "Names a concrete replacement (cost-weighted error, per-class precision/recall)"
+        }
+      }
+    ],
+    "passAt": 0.6
+  },
+  "modelAnswer": {
+    "zh-CN": "类别不均衡且错误代价不同的时候。比如分流模型 95% 的工单在两个大队列，准确率很高但退款错分率可能很差；我会用代价加权错误率，并单独报告退款队列的精确率。",
+    "en-US": "When classes are imbalanced and errors cost differently. A triage model with 95% of tickets in two big queues can score high accuracy while misrouting refunds; I would use cost-weighted error and report refund precision separately."
+  },
+  "explanation": {
+    "zh-CN": "指标是决策代价的代理。",
+    "en-US": "A metric is a proxy for the decision's costs."
+  },
+  "hints": []
+}

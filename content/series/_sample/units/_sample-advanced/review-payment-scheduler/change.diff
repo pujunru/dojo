@@ -1,0 +1,19 @@
+diff --git a/payments.py b/payments.py
+--- a/payments.py
++++ b/payments.py
+@@ -8,3 +8,15 @@ class PaymentScheduler:
+ 
+     def schedule(self, account_id, amount, delay):
+         self.pending.append((time.time() + delay, account_id, amount))
++
++    def run_due(self):
++        now = time.time()
++        for item in self.pending:
++            due_at, account_id, amount = item
++            if due_at >= now:
++                continue
++            self.pending.remove(item)
++            try:
++                self.ledger.spend(account_id, amount)
++            except Exception:
++                pass

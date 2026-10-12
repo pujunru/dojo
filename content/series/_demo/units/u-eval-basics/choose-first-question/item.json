@@ -1,0 +1,74 @@
+{
+  "id": "dj-demo-choose-first-question",
+  "version": 1,
+  "type": "choose-design",
+  "lesson": "l-eval-basics-1",
+  "kcs": [
+    {
+      "id": "eval-clarify",
+      "weight": 1
+    }
+  ],
+  "archetype": "eval-design",
+  "skin": "chatbot-launch",
+  "difficulty": 2,
+  "estSeconds": 75,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "团队让你“给新客服模型做个评测”。你第一个问题应该问什么？",
+    "en-US": "The team asks you to “build an eval for the new support model”. What do you ask first?"
+  },
+  "scenario": {
+    "zh-CN": "下周要决定是否把它替换掉现网模型。",
+    "en-US": "Next week they decide whether it replaces the production model."
+  },
+  "options": [
+    {
+      "id": "decision",
+      "text": {
+        "zh-CN": "这次评测要支撑什么决策、和谁比",
+        "en-US": "What decision the eval informs, and against what baseline"
+      },
+      "correct": true,
+      "why": {
+        "zh-CN": "评测是为决策服务的：替换现网就必须和现网模型在同一分布上比较。",
+        "en-US": "An eval serves a decision: replacing production means comparing against the production model on the same distribution."
+      }
+    },
+    {
+      "id": "bench",
+      "text": {
+        "zh-CN": "用哪个公开 benchmark",
+        "en-US": "Which public benchmark to use"
+      },
+      "correct": false,
+      "why": {
+        "zh-CN": "先选 benchmark 会让评测跟决策脱节，客服流量多半不在任何公开集里。",
+        "en-US": "Picking a benchmark first detaches the eval from the decision; support traffic is rarely in any public set."
+      }
+    },
+    {
+      "id": "gpu",
+      "text": {
+        "zh-CN": "能用多少 GPU",
+        "en-US": "How many GPUs are available"
+      },
+      "correct": false,
+      "why": {
+        "zh-CN": "资源是约束，不是目标；先定目标再估算预算。",
+        "en-US": "Compute is a constraint, not the goal; settle the goal, then budget."
+      }
+    }
+  ],
+  "multi": false,
+  "explanation": {
+    "zh-CN": "先问决策和基线，再谈数据、指标和资源。",
+    "en-US": "Ask about the decision and baseline first; data, metrics and compute follow."
+  },
+  "hints": [
+    {
+      "zh-CN": "这份评测结果最后会被谁、用来做什么？",
+      "en-US": "Who will use the result, and for what?"
+    }
+  ]
+}

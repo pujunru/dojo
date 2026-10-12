@@ -1,0 +1,8 @@
+node_modules/
+dist/
+storybook-static/
+public/content/
+src/core/item-index.generated.ts
+.screenshots/
+*.log
+.DS_Store

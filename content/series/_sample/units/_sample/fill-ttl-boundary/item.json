@@ -1,0 +1,33 @@
+{
+  "id": "dj-sample-fill-ttl-boundary",
+  "version": 1,
+  "type": "fill-blank",
+  "lesson": "_sample-l1",
+  "kcs": [{ "id": "_sample-ttl-boundary", "weight": 1 }],
+  "archetype": "stateful-time",
+  "skin": "session-cache",
+  "difficulty": 2,
+  "estSeconds": 45,
+  "runtime": "sandbox",
+  "prompt": {
+    "zh-CN": "约定：条目在写入后**恰好** `ttl` 秒时过期。补全判断过期的表达式。",
+    "en-US": "Contract: an entry expires **exactly** `ttl` seconds after it was written. Complete the expiry check."
+  },
+  "explanation": {
+    "zh-CN": "“恰好 ttl 秒时过期”意味着 `now == expires_at` 已经过期，所以要用 `>=`；写成 `>` 会让条目多活一个瞬间，隐藏测试 `test_gone_exactly_at_ttl` 专门卡这个边界。",
+    "en-US": "\"Expires exactly at ttl\" means `now == expires_at` is already expired, so the check is `>=`; `>` keeps the entry alive for one more instant, which `test_gone_exactly_at_ttl` pins down."
+  },
+  "hints": [
+    { "zh-CN": "`now == expires_at` 时应该返回什么？", "en-US": "What should `now == expires_at` return?" }
+  ],
+  "template": "template",
+  "blanks": [
+    {
+      "id": "expired",
+      "accept": ["time.monotonic() >= expires_at", "expires_at <= time.monotonic()"],
+      "wrong": ["time.monotonic() > expires_at", "expires_at < time.monotonic()"],
+      "kcs": ["_sample-ttl-boundary"]
+    }
+  ],
+  "tests": { "tests": "tests.py", "options": { "seed": 0, "fakeClock": true, "stepBudget": 200000, "wallMs": 4000, "asyncTests": false } }
+}

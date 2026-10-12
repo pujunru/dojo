@@ -1,0 +1,27 @@
+{
+  "id": "dj-sample-spotbug-mutable-default",
+  "version": 1,
+  "type": "spot-bug",
+  "lesson": "_sample-l1",
+  "kcs": [{ "id": "_sample-mutable-default", "weight": 1 }],
+  "archetype": "python-core",
+  "skin": "camping",
+  "difficulty": 2,
+  "estSeconds": 60,
+  "runtime": "sandbox",
+  "prompt": {
+    "zh-CN": "第二次调用 `pack` 时，结果里混进了第一单的物品。点出出错的那一行。",
+    "en-US": "The second call to `pack` returns items from the first order. Select the line that causes it."
+  },
+  "explanation": {
+    "zh-CN": "默认参数在函数定义时只求值一次，`bag=[]` 让所有调用共享同一个列表。用 `None` 作哨兵，在函数体里新建列表。",
+    "en-US": "Default values are evaluated once, at definition time, so `bag=[]` is one list shared by every call. Use `None` as a sentinel and build the list inside the body."
+  },
+  "hints": [
+    { "zh-CN": "默认值是什么时候被创建的？", "en-US": "When is the default value created?" }
+  ],
+  "files": "code",
+  "bugs": [{ "path": "inventory.py", "lines": [1], "kcs": ["_sample-mutable-default"] }],
+  "tolerance": 0,
+  "fixStage": { "fix": "fix", "tests": "tests.py", "options": { "seed": 0, "fakeClock": false, "stepBudget": 200000, "wallMs": 4000, "asyncTests": false } }
+}

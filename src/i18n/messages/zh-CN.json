@@ -1,0 +1,600 @@
+{
+  "dojo": {
+    "itemType": {
+      "predict": "预测输出",
+      "spotBug": "找 bug",
+      "fillBlank": "填空",
+      "parsons": "代码排序",
+      "chooseDesign": "选设计",
+      "implement": "实现",
+      "refactor": "重构",
+      "writeTests": "写测试",
+      "ladder": "阶梯",
+      "explain": "讲清楚",
+      "review": "代码审查",
+      "case": "分段案例"
+    },
+    "header": {
+      "region": "今日练习概况",
+      "welcomeTitle": "欢迎来到道场",
+      "welcomeBody": "每天十分钟：先热身复习，再学一点新内容。从路径上的第一课开始。",
+      "atRiskNotice": "今天还没练习。完成一次练习，就能保住 {count, plural, other {# 天}}的连胜。",
+      "streakLabel": "连胜",
+      "streakAria": "{status, select, atRisk {连胜 {count, plural, other {# 天}}，今天还没练} frozen {连胜 {count, plural, other {# 天}}，冻结保护中} broken {连胜已中断} other {连胜 {count, plural, other {# 天}}}}",
+      "streakStatus": {
+        "active": "保持中",
+        "atRisk": "今天还没练",
+        "frozen": "冻结保护中",
+        "broken": "已中断"
+      },
+      "goalLabel": "今日目标",
+      "goalAria": "今日已得 {xp} XP，目标 {goal} XP",
+      "goalValue": "{xp} / {goal} XP",
+      "goalMet": "目标达成",
+      "freezesLabel": "连胜冻结",
+      "freezes": "{count, plural, =0 {暂无} other {# 个可用}}",
+      "dueLabel": "到期复习",
+      "due": "{count, plural, =0 {全部完成} other {# 个技能}}",
+      "start": "开始今日练习",
+      "resume": "继续今日练习"
+    },
+    "path": {
+      "tierProgress": "已完成 {done} / {total} 个单元",
+      "unitOrdinal": "单元 {number}",
+      "unitCrowns": "单元掌握度 {level} / 5{cracked, select, yes {，有裂纹} other {}}",
+      "unitProgress": "{done} / {total} 节",
+      "unitCracked": "有裂纹：这个单元里有技能正在遗忘，复习一下就能补上。",
+      "unitLocked": "完成前置单元后解锁",
+      "unitLockedAfter": "完成「{unit}」后解锁",
+      "node": {
+        "state": {
+          "locked": "未解锁",
+          "available": "可开始",
+          "inProgress": "进行中",
+          "complete": "已完成"
+        },
+        "lesson": "课程",
+        "checkpoint": "单元检查点",
+        "you": "当前位置",
+        "minutes": "{count, plural, other {# 分钟}}",
+        "progress": "已做 {done} / {total} 题",
+        "start": "开始",
+        "continue": "继续",
+        "review": "复习",
+        "actionAria": "{action}：{title}",
+        "localOnly": "需要代码运行器",
+        "localOnlyHint": "这一课要运行代码来判答案，而这个版本没有代码运行器。",
+        "crowns": "掌握度 {level} / 5{cracked, select, yes {，有裂纹} other {}}"
+      }
+    },
+    "player": {
+      "progress": {
+        "label": "练习进度",
+        "aria": "已完成 {done} / {total} 题",
+        "count": "{done} / {total}",
+        "close": "结束练习",
+        "requeued": "{count, plural, other {加入 # 道重练}}"
+      },
+      "frame": {
+        "actions": "答题操作",
+        "hint": "提示",
+        "skip": "跳过",
+        "check": "检查",
+        "checking": "检查中…",
+        "runTests": "运行测试",
+        "running": "运行中…",
+        "continue": "继续",
+        "giveUp": "看答案"
+      },
+      "feedback": {
+        "title": {
+          "correct": "答对了！",
+          "partial": "部分正确",
+          "incorrect": "还不对"
+        },
+        "xp": "{count, plural, other {+# XP}}",
+        "correctAnswer": "正确答案",
+        "followUpLabel": "追问",
+        "retry": "重试"
+      },
+      "hint": {
+        "title": "提示",
+        "counter": "第 {current} / {total} 条",
+        "empty": "这道题没有静态提示。",
+        "penalty": "用过提示的题最多记为“困难”，复习会来得早一些。",
+        "next": "下一条提示",
+        "exhausted": "静态提示已经用完。",
+        "retry": "重试"
+      },
+      "meta": {
+        "reason": {
+          "new": "新内容",
+          "review": "复习",
+          "remedial": "补救",
+          "requeue": "重练"
+        },
+        "runCount": "{count, plural, other {已运行测试 # 次}}"
+      }
+    },
+    "runtime": {
+      "label": "运行环境",
+      "state": {
+        "provisioning": "正在准备代码运行器…",
+        "provisioningProgress": "正在准备代码运行器… {progress}",
+        "ready": "代码运行器就绪",
+        "running": "正在运行测试…",
+        "timedOut": "运行超时，运行器已重启",
+        "failed": "代码运行器不可用",
+        "noRunner": "没有代码运行器"
+      },
+      "detail": {
+        "timedOutJob": "整次运行超出了时间预算。检查是否有死循环或阻塞调用。",
+        "timedOutImport": "导入你的模块时就超时了。检查模块顶层的代码。",
+        "sandboxFailed": "代码运行器启动失败。",
+        "pythonMissing": "没有找到 Python 3.12 或更高版本。",
+        "harnessError": "测试工具本身出错，不是你代码的问题。",
+        "noRunner": "这个版本不能运行代码，需要跑测试的题会跳过。",
+        "hostUnreachable": "连不上代码运行器。"
+      },
+      "elapsed": "已用 {seconds} 秒",
+      "retry": "重试"
+    },
+    "tests": {
+      "title": "测试结果",
+      "empty": "还没有运行测试。",
+      "running": "正在运行测试…",
+      "summary": "{passed} / {total} 个测试通过",
+      "allPassed": "全部通过",
+      "someFailed": "{count, plural, other {# 个失败}}",
+      "hidden": "隐藏测试",
+      "outcome": {
+        "pass": "通过",
+        "assert": "断言失败",
+        "error": "报错",
+        "timeout": "超时"
+      },
+      "ms": "{ms} 毫秒",
+      "location": "{file} 第 {line} 行",
+      "locationCol": "{file} 第 {line} 行第 {col} 列",
+      "frames": "调用栈",
+      "frame": "{file}:{line}，在 {fn} 中",
+      "traceback": "展开 traceback",
+      "testTimeout": "这个测试超出了步数预算，可能有死循环。",
+      "stdout": "标准输出",
+      "stderr": "标准错误",
+      "truncated": "只显示前 {count} 行，共 {total} 行",
+      "showAll": "显示全部 {count, plural, other {# 行}}",
+      "showLess": "收起",
+      "compileError": "语法错误，测试没有运行",
+      "importError": "导入失败，测试没有运行",
+      "jobTimeout": "运行超时，测试没有跑完",
+      "jobTimeoutBody": "整次运行超出了时间预算。检查是否有死循环、无界等待或阻塞调用。",
+      "importTimeout": "导入超时，测试没有运行",
+      "importTimeoutBody": "导入你的模块时就超时了。模块顶层不要执行耗时操作。",
+      "harnessError": "测试工具出错",
+      "harnessErrorBody": "这不是你代码的问题，这次运行不计分。",
+      "unavailable": "没有可用的运行环境",
+      "unavailableBody": "这道题需要代码运行器，而这个版本没有。",
+      "noOutput": "没有输出。",
+      "scriptException": "程序抛出了异常"
+    },
+    "mutants": {
+      "title": "变异体",
+      "summary": "杀死 {killed} / {total}",
+      "target": "目标：至少杀死 {target}",
+      "targetMet": "达标",
+      "targetMissed": "未达标",
+      "killed": "已杀死",
+      "killedBy": "被 {test} 杀死",
+      "survived": "存活",
+      "referenceFailedTitle": "测试在参考解上失败",
+      "referenceFailed": "你的测试在正确代码上只通过了 {passed} / {total} 个。先让它们在参考解上全绿，变异体才有意义。"
+    },
+    "rubric": {
+      "title": "评分细则",
+      "total": "总分 {value}",
+      "passAt": "及格线 {value}",
+      "scoreAria": "得分 {value}",
+      "evidence": "依据",
+      "noEvidence": "回答里没有找到相关表述。",
+      "selfTitle": "对照参考答案自评",
+      "selfBody": "读一遍参考答案，对照下面的要点检查自己的回答，选出最接近的一档。",
+      "modelAnswer": "参考答案",
+      "mentions": "应提到：{terms}",
+      "gradeLegend": "你答得怎么样？",
+      "grade": {
+        "again": "没答出来",
+        "hard": "勉强答上",
+        "good": "答对了",
+        "easy": "很轻松"
+      }
+    },
+    "editor": {
+      "loading": "正在加载编辑器…",
+      "readOnlyLabel": "{path}（只读）",
+      "keyboardHint": "Tab 缩进 · 先按 Esc 再按 Tab 离开编辑器"
+    },
+    "items": {
+      "yourAnswer": "你的答案",
+      "expected": "实际结果",
+      "matches": "一致",
+      "differs": "不一致",
+      "predict": {
+        "choiceLegend": "会输出什么？",
+        "optionLabel": "选项 {letter}",
+        "outputLabel": "你预测的输出",
+        "outputPlaceholder": "逐行写出 print 的内容",
+        "outputHint": "行尾空白和换行风格不影响判分。",
+        "exceptionLabel": "会抛出哪个异常？",
+        "exceptionPlaceholder": "例如 KeyError",
+        "noAnswer": "（未作答）",
+        "schedule": "线程调度",
+        "reveal": {
+          "correct": "正确",
+          "incorrect": "不正确",
+          "missed": "正确答案"
+        }
+      },
+      "spotBug": {
+        "instructions": "点选出错的行，可以选多行。键盘：上下方向键移动，空格或回车选中。",
+        "keyboard": "用上下方向键在代码行之间移动，按空格或回车选中或取消当前行。",
+        "lineSelected": "第 {line} 行已选中",
+        "lineCleared": "第 {line} 行已取消",
+        "selectedSummary": "{count, plural, =0 {还没有选中任何行} other {已选 # 行}}",
+        "revealTitle": "找 bug 结果",
+        "found": "找到了",
+        "missed": "漏掉了",
+        "falsePositive": "这一行没问题",
+        "bugAt": "{path} 第 {lines} 行",
+        "lineAt": "{path} 第 {line} 行",
+        "foundSummary": "找到 {found} / {total} 个 bug",
+        "diagnosticFound": "bug 在这里：你找到了",
+        "diagnosticMissed": "bug 在这里：你漏掉了",
+        "diagnosticFalse": "这一行没有问题"
+      },
+      "fillBlank": {
+        "editorLabel": "{path} 填空编辑器",
+        "progress": "已填 {filled} / {total} 个空",
+        "revealTitle": "填空结果",
+        "blankName": "空 {id}",
+        "empty": "（空）",
+        "accepted": "参考答案"
+      },
+      "parsons": {
+        "answerRegion": "你的答案（按执行顺序）",
+        "poolRegion": "可用的代码行（含干扰项）",
+        "instructions": "上下方向键移动焦点；Alt+上/下 调整位置；Delete 移回备选区；在备选区按回车加入答案。",
+        "instructionsIndent": "上下方向键移动焦点；Alt+上/下 调整位置；Alt+左/右 调整缩进；Delete 移回备选区；在备选区按回车加入答案。",
+        "emptyAnswer": "把代码行拖到这里，或在下方的行上按回车加入",
+        "emptyPool": "所有代码行都已使用",
+        "itemName": "第 {position} / {total} 行，缩进 {indent}：{code}",
+        "moved": "已移到第 {position} / {total} 位：{code}",
+        "indented": "缩进改为 {level}：{code}",
+        "movedToPool": "已移回备选区：{code}",
+        "movedToAnswer": "已加入答案第 {position} / {total} 位：{code}",
+        "indentIncrease": "增加缩进",
+        "indentDecrease": "减少缩进",
+        "moveToPool": "移回备选区",
+        "moveToAnswer": "加入答案",
+        "revealCorrect": "位置正确",
+        "revealIncorrect": "位置或缩进不对",
+        "solution": "一种正确的顺序",
+        "revealIndent": "位置对，缩进不对",
+        "indentHint": "缩进：每按一次 = Python 的一级（4 个空格）。用每行右侧的缩进按钮，或在行上按 Alt+→ / Alt+←。",
+        "noteIndent": "位置对，但缩进应为 {expected} 级（{spaces} 个空格），你放在了 {actual} 级。",
+        "noteDistractor": "这是干扰项。正确写法：<code>{correct}</code>",
+        "noteDistractorGeneric": "这是干扰项，正确答案里没有这一行。",
+        "notePosition": "这一行的位置不对。"
+      },
+      "chooseDesign": {
+        "scenario": "场景",
+        "legendSingle": "选出最能吸收这个变化的设计",
+        "legendMulti": "选出所有合适的设计（多选）",
+        "rationaleLabel": "理由（可选）",
+        "rationalePlaceholder": "一两句话：为什么这个设计扛得住下一次需求变化？",
+        "reveal": {
+          "correct": "正确",
+          "incorrect": "不合适",
+          "missed": "漏选的合适设计"
+        }
+      },
+      "implement": {
+        "filesLabel": "文件",
+        "editorLabel": "{path} 代码编辑器",
+        "reset": "恢复初始代码",
+        "solutionTab": "参考解 · {path}"
+      },
+      "explain": {
+        "question": "问题",
+        "answerLabel": "你的回答",
+        "placeholder": "用两三句话讲清楚：结论、原因、代价。",
+        "charCount": "{count, plural, other {# 字}}",
+        "modelAnswer": "参考答案"
+      },
+      "refactor": {
+        "newRequirement": "新需求",
+        "publicApi": "不能改变的公开接口",
+        "filesLabel": "重构文件",
+        "solutionTab": "参考：{path}",
+        "changedLines": "相对原代码改动了 {count} 行",
+        "changedLinesOf": "相对原代码改动了 {count} 行（建议约 {limit} 行）",
+        "splitLabel": "原有测试与新测试",
+        "oldTests": "原有测试",
+        "newTests": "新需求测试",
+        "passedOf": "通过 {passed} / {total}"
+      },
+      "writeTests": {
+        "spec": "规格",
+        "target": "预埋了 {count} 个错误实现，至少杀死 {target}。",
+        "filesLabel": "测试文件",
+        "mutantHidden": "预埋的错误实现（作答后揭晓说明）"
+      },
+      "review": {
+        "instructions": "在 diff 中选中一行来添加审查意见，再选择严重程度和类别。键盘：方向键移动，回车或空格选中。",
+        "diffLabel": "待审查的改动",
+        "lineName": "{kind, select, add {新增行} del {删除行} other {行}} {line}：{code}",
+        "commented": "已有意见",
+        "hit": "命中",
+        "missed": "漏掉",
+        "falsePositive": "误报",
+        "emptyDiff": "这个 diff 是空的。",
+        "context": "改动后的完整文件",
+        "findingsTitle": "你的审查意见",
+        "findingsCount": "{count, plural, =0 {还没有意见} other {共 # 条意见}}，{complete} 条已填完整",
+        "noFindings": "还没有意见。在 diff 中选中一行来添加。",
+        "findingAt": "{path}:{line}",
+        "removeFinding": "删除第 {line} 行的意见",
+        "severityLabel": "严重程度",
+        "categoryLabel": "类别",
+        "categoryPlaceholder": "选择类别",
+        "noSeverity": "未选严重程度",
+        "noCategory": "未选类别",
+        "editingInline": "正在 diff 中编辑第 {line} 行的意见",
+        "issuesTitle": "预埋的问题",
+        "severityWrong": "严重程度不同",
+        "categoryWrong": "类别不同",
+        "bothWrong": "严重程度和类别都不同",
+        "severity": {
+          "blocker": "阻断",
+          "major": "严重",
+          "minor": "轻微"
+        },
+        "category": {
+          "correctness": "正确性",
+          "state": "状态与变更",
+          "error-handling": "错误处理",
+          "concurrency": "并发",
+          "performance": "性能",
+          "security": "安全",
+          "api": "接口设计",
+          "testing": "测试",
+          "readability": "可读性"
+        }
+      },
+      "ladder": {
+        "levelsLabel": "阶梯关卡",
+        "levelNumber": "第 {number} 级",
+        "lockedTitle": "上一级完成后解锁",
+        "timebox": "{minutes} 分钟",
+        "timeUsed": "已用 {used} / {minutes} 分钟",
+        "overtime": "超时",
+        "failedRuns": "失败运行 {count} 次",
+        "status": {
+          "locked": "未解锁",
+          "active": "进行中",
+          "passed": "已通过",
+          "failed": "未通过",
+          "skipped": "已跳过"
+        },
+        "countdown": {
+          "name": "第 {level} 级剩余时间",
+          "warning": "时间快到了",
+          "overtime": "超时",
+          "paused": "已暂停",
+          "announceWarning": "本级剩余时间不足五分之一。",
+          "announceOvertime": "本级已超时。可以继续作答，超出的时间会被记录。"
+        },
+        "filesLabel": "阶梯文件",
+        "solutionTab": "参考：{path}",
+        "earlierLevels": "已完成的 {count} 级",
+        "levelHeading": "第 {number} 级：{title}",
+        "skipLevel": "跳到下一级",
+        "skipLast": "跳过并结束",
+        "levelTests": "第 {number} 级测试"
+      },
+      "case": {
+        "scenario": "场景",
+        "clock": "本场还剩约 {minutes} 分钟",
+        "stage": "第 {index} / {total} 段",
+        "twist": "新约束",
+        "answerLabel": "你的回答",
+        "placeholder": "像当面回答一样：先给结论，再说理由和代价。",
+        "moreStages": "{count, plural, other {后面还有 # 段追问，答完这一段才会出现}}"
+      }
+    },
+    "summary": {
+      "title": {
+        "perfect": "全对！",
+        "good": "练习完成",
+        "rough": "练完了，明天会更顺"
+      },
+      "subtitle": "{count, plural, other {共 # 题}}，答对 {passed} 题",
+      "xpLabel": "获得 XP",
+      "xp": "{count, plural, other {+# XP}}",
+      "xpBonus": "{count, plural, other {含完成奖励 # XP}}",
+      "goal": "今日 {xp} / {goal} XP",
+      "accuracyLabel": "正确率",
+      "noValue": "—",
+      "items": "{passed} / {count, plural, other {# 题}}",
+      "timeLabel": "用时",
+      "durationMinutes": "{minutes} 分 {seconds} 秒",
+      "durationSeconds": "{seconds} 秒",
+      "activeTime": "有效作答时间",
+      "streakAria": "{count, plural, other {连胜 # 天}}",
+      "streak": {
+        "extended": "连胜延长到 {count, plural, other {# 天}}",
+        "keptByFreeze": "冻结保住了 {count, plural, other {# 天}}的连胜",
+        "reset": "连胜重新开始，今天是第 {count} 天",
+        "unchanged": "今天的连胜已经算过了：{count, plural, other {# 天}}"
+      },
+      "freezeEarned": "获得 1 个连胜冻结，现在共有 {count} 个",
+      "freezesLeft": "{count, plural, =0 {没有剩余冻结} other {剩余 # 个冻结}}",
+      "kcTitle": "这次加强的技能",
+      "kcEmpty": "这次没有技能发生变化。",
+      "kcAria": "{title}：回忆概率从 {before} 变为 {after}",
+      "kcValues": "{before} → {after}",
+      "masteryAria": "掌握度从 {before} 变为 {after}",
+      "remedialTitle": "补救包",
+      "remedialBody": "{count, plural, other {# 道}}针对今天失分技能的短题，趁热打铁。",
+      "remedialStart": "开始补救",
+      "continue": "继续"
+    },
+    "heatmap": {
+      "title": "技能热力图",
+      "legend": "图例",
+      "band": {
+        "unseen": "未学",
+        "weak": "薄弱",
+        "fading": "在遗忘",
+        "solid": "稳固",
+        "strong": "牢固"
+      },
+      "bandRange": {
+        "unseen": "没练过",
+        "weak": "低于 50%",
+        "fading": "50–70%",
+        "solid": "70–90%",
+        "strong": "90% 以上"
+      },
+      "due": "到期",
+      "empty": "还没有练过任何技能。完成第一课后，这里会亮起来。",
+      "kcCount": "{count, plural, other {# 个技能}}",
+      "cellUnseen": "{title}：未学",
+      "cellAria": "{title}：{band}，回忆概率 {p}，掌握度 {mastery}{due, select, yes {，已到期} other {}}"
+    },
+    "review": {
+      "title": "复习队列",
+      "practiceAll": "{count, plural, =0 {没有可复习的} other {只练复习（# 个）}}",
+      "emptyTitle": "没有到期复习",
+      "emptyBody": "所有技能都还记得牢。",
+      "group": {
+        "remedial": "补救中",
+        "due": "已到期",
+        "upcoming": "即将到期"
+      },
+      "recall": "回忆概率 {value}",
+      "dueSince": "{when}到期",
+      "dueIn": "{when}到期",
+      "remedialUntil": "{when}结束补救",
+      "practiceOne": "练这个",
+      "practiceOneAria": "练习：{title}"
+    },
+    "series": {
+      "label": "选择系列",
+      "progress": "已完成 {done} / {total} 个单元"
+    },
+    "judge": {
+      "title": "评分要点判定",
+      "bySelf": "自评",
+      "mentions": "应提到：{terms}",
+      "toggleLabel": "判定：{criterion}",
+      "met": "达到",
+      "notMet": "没达到",
+      "showModel": "看参考答案",
+      "hideModel": "收起参考答案",
+      "gradeLegend": "你答得怎么样？",
+      "suggested": "建议",
+      "gradeNote": "建议档位最高到「答对了」；「很轻松」只能由你自己选。",
+      "nextStage": "进入下一段",
+      "grade": {
+        "again": "没答出来",
+        "hard": "勉强答上",
+        "good": "答对了",
+        "easy": "很轻松"
+      },
+      "selfHint": "先读参考答案，再逐项标出你的回答达到了哪些标准。",
+      "decidedByPhrase": "由短语检查判定：你的回答里出现了这条标准不允许的说法。"
+    },
+    "needsRunner": {
+      "title": "这道题需要运行代码",
+      "body": "它的答案要靠运行隐藏测试来判，而这个版本没有代码运行器。先跳过，练习会继续出不需要运行代码的题。"
+    },
+    "simulation": {
+      "eyebrow": "限时案例",
+      "minutes": "{count} 分钟",
+      "start": "开始限时案例"
+    }
+  },
+  "app": {
+    "title": "道场",
+    "tabs": {
+      "label": "道场视图",
+      "path": "路径",
+      "skills": "技能",
+      "review": "复习",
+      "simulation": "模拟"
+    },
+    "loading": "正在加载道场…",
+    "loadError": {
+      "title": "道场加载失败",
+      "content": "内容加载失败，请检查网络后重试。",
+      "state": "无法从这个浏览器读取你的进度。",
+      "retry": "重试"
+    },
+    "emptyContent": {
+      "title": "还没有练习内容",
+      "body": "还没有安装任何系列。在 content/series/ 下添加内容，然后运行 `npm run content:build`。"
+    },
+    "session": {
+      "starting": "正在准备练习…",
+      "empty": "这里暂时没有可练的题：相关技能都还很熟，或者题目需要代码运行器。",
+      "startError": "练习无法开始。",
+      "finishing": "正在保存本次练习…",
+      "finishError": "还有作答没能保存到这台设备上，所以暂时无法结束本次练习。",
+      "finishRetry": "重试",
+      "dismiss": "关闭"
+    },
+    "sync": {
+      "pending": "正在保存 {count, plural, other {# 条作答}}…",
+      "failing": "浏览器没能保存刚才的作答（无痕模式或存储已满）。关闭标签页前先导出进度。"
+    },
+    "simulation": {
+      "title": "限时案例",
+      "body": "分段追问的案例题，在这里计时作答：每段答完才出现下一段，每段对照评分标准自评。",
+      "empty": "当前内容里还没有限时案例。",
+      "loading": "正在加载限时案例…",
+      "loadError": "限时案例加载失败。"
+    },
+    "errors": {
+      "NETWORK": "连不上内容文件。检查网络后重试。",
+      "CONTENT_INVALID": "内容文件无效。用 `npm run content:build` 重新构建。",
+      "CONTENT_EMPTY": "还没有安装任何内容。",
+      "NOT_FOUND": "这台设备上已经没有这个练习了。",
+      "SESSION_CLOSED": "这个练习已经结束了。",
+      "STORAGE": "浏览器拒绝保存你的进度（无痕模式或存储已满）。",
+      "INVALID_SIGNAL": "这次作答没能记录下来。"
+    }
+  },
+  "shell": {
+    "language": "语言",
+    "openData": "我的数据",
+    "closeData": "关闭",
+    "data": {
+      "title": "学习进度",
+      "whereDurable": "进度只保存在这台设备的这个浏览器里，不会发送到任何地方。换设备时先导出。",
+      "whereMemory": "这个浏览器不允许保存数据（可能是无痕模式），关闭标签页后进度就没了。离开前记得导出。",
+      "summary": "{totalXp} XP · {attempts} 次作答 · 跟踪 {kcs} 个技能",
+      "export": "导出",
+      "import": "导入",
+      "imported": "进度已导入。",
+      "importError": {
+        "format": "这个文件不是道场的进度导出。",
+        "version": "这个导出来自不兼容的版本。"
+      },
+      "reset": "重新开始",
+      "resetConfirm": "删除全部进度",
+      "resetDone": "进度已删除。",
+      "cancel": "取消"
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "id": "dj-demo-explain-why-baseline",
+  "version": 1,
+  "type": "explain",
+  "lesson": "l-eval-basics-1",
+  "kcs": [
+    {
+      "id": "eval-clarify",
+      "weight": 1
+    }
+  ],
+  "archetype": "eval-design",
+  "skin": "chatbot-launch",
+  "difficulty": 2,
+  "estSeconds": 150,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "用三四句话回答。",
+    "en-US": "Answer in three or four sentences."
+  },
+  "question": {
+    "zh-CN": "为什么评测一个新模型时一定要明确“和谁比、为了什么决策”？",
+    "en-US": "Why must an eval of a new model state what it is compared against and which decision it informs?"
+  },
+  "rubric": {
+    "criteria": [
+      {
+        "id": "decision",
+        "kcs": [
+          "eval-clarify"
+        ],
+        "weight": 2,
+        "description": {
+          "zh-CN": "指出评测结论服务于具体决策（上线、替换、继续训练）",
+          "en-US": "Says the result serves a concrete decision (launch, replace, keep training)"
+        }
+      },
+      {
+        "id": "baseline",
+        "kcs": [
+          "eval-clarify"
+        ],
+        "weight": 1,
+        "description": {
+          "zh-CN": "指出需要和现网或强基线在同一数据上比较",
+          "en-US": "Says it must be compared with production or a strong baseline on the same data"
+        }
+      },
+      {
+        "id": "distribution",
+        "kcs": [
+          "eval-clarify"
+        ],
+        "weight": 1,
+        "description": {
+          "zh-CN": "提到评测分布要匹配决策影响的流量",
+          "en-US": "Mentions matching the eval distribution to the traffic the decision affects"
+        }
+      }
+    ],
+    "passAt": 0.6
+  },
+  "modelAnswer": {
+    "zh-CN": "没有决策，评测分数无法解读；没有基线，分数没有参照。替换现网的决策要求和现网模型在真实流量分布上比较，分数差才有意义。",
+    "en-US": "Without a decision a score cannot be interpreted; without a baseline it has no reference. A replacement decision requires comparing against the production model on the real traffic distribution."
+  },
+  "explanation": {
+    "zh-CN": "这是所有 eval 设计题的第一步。",
+    "en-US": "This is the first step of every eval design question."
+  },
+  "hints": []
+}

@@ -1,0 +1,600 @@
+{
+  "dojo": {
+    "itemType": {
+      "predict": "Predict",
+      "spotBug": "Spot the bug",
+      "fillBlank": "Fill in",
+      "parsons": "Reorder",
+      "chooseDesign": "Choose a design",
+      "implement": "Implement",
+      "refactor": "Refactor",
+      "writeTests": "Write tests",
+      "ladder": "Ladder",
+      "explain": "Explain",
+      "review": "Code review",
+      "case": "Staged case"
+    },
+    "header": {
+      "region": "Today's practice",
+      "welcomeTitle": "Welcome to the Dojo",
+      "welcomeBody": "Ten minutes a day: warm up with reviews, then learn something new. Start with the first lesson on the path.",
+      "atRiskNotice": "You haven't practised today. Finish one session to keep your {count, plural, one {# day} other {# days}} streak.",
+      "streakLabel": "Streak",
+      "streakAria": "{status, select, atRisk {{count, plural, one {# day streak} other {# day streak}}, not practised today} frozen {{count, plural, one {# day streak} other {# day streak}}, protected by a freeze} broken {Streak broken} other {{count, plural, one {# day streak} other {# day streak}}}}",
+      "streakStatus": {
+        "active": "On track",
+        "atRisk": "Not yet today",
+        "frozen": "Freeze active",
+        "broken": "Broken"
+      },
+      "goalLabel": "Daily goal",
+      "goalAria": "{xp} of {goal} XP earned today",
+      "goalValue": "{xp} / {goal} XP",
+      "goalMet": "Goal met",
+      "freezesLabel": "Streak freezes",
+      "freezes": "{count, plural, =0 {None} one {# available} other {# available}}",
+      "dueLabel": "Due reviews",
+      "due": "{count, plural, =0 {All caught up} one {# skill} other {# skills}}",
+      "start": "Start today's practice",
+      "resume": "Resume today's practice"
+    },
+    "path": {
+      "tierProgress": "{done} of {total} units complete",
+      "unitOrdinal": "Unit {number}",
+      "unitCrowns": "Unit mastery {level} of 5{cracked, select, yes {, cracked} other {}}",
+      "unitProgress": "{done} / {total} lessons",
+      "unitCracked": "Cracked: some skills in this unit are fading. A quick review restores them.",
+      "unitLocked": "Unlocks after the prerequisite units",
+      "unitLockedAfter": "Unlocks after “{unit}”",
+      "node": {
+        "state": {
+          "locked": "Locked",
+          "available": "Ready",
+          "inProgress": "In progress",
+          "complete": "Complete"
+        },
+        "lesson": "Lesson",
+        "checkpoint": "Unit checkpoint",
+        "you": "You are here",
+        "minutes": "{count, plural, one {# min} other {# min}}",
+        "progress": "{done} of {total} done",
+        "start": "Start",
+        "continue": "Continue",
+        "review": "Review",
+        "actionAria": "{action}: {title}",
+        "localOnly": "Needs a code runner",
+        "localOnlyHint": "This lesson grades answers by running code, and this build has no code runner.",
+        "crowns": "Mastery {level} of 5{cracked, select, yes {, cracked} other {}}"
+      }
+    },
+    "player": {
+      "progress": {
+        "label": "Session progress",
+        "aria": "{done} of {total} items done",
+        "count": "{done} / {total}",
+        "close": "End session",
+        "requeued": "{count, plural, one {# retry added} other {# retries added}}"
+      },
+      "frame": {
+        "actions": "Answer actions",
+        "hint": "Hint",
+        "skip": "Skip",
+        "check": "Check",
+        "checking": "Checking…",
+        "runTests": "Run tests",
+        "running": "Running…",
+        "continue": "Continue",
+        "giveUp": "Show solution"
+      },
+      "feedback": {
+        "title": {
+          "correct": "Correct!",
+          "partial": "Partly right",
+          "incorrect": "Not quite"
+        },
+        "xp": "{count, plural, other {+# XP}}",
+        "correctAnswer": "Correct answer",
+        "followUpLabel": "Follow-up",
+        "retry": "Try again"
+      },
+      "hint": {
+        "title": "Hints",
+        "counter": "{current} of {total}",
+        "empty": "This item has no written hints.",
+        "penalty": "An item answered with hints counts as Hard at best, so its review comes sooner.",
+        "next": "Next hint",
+        "exhausted": "No written hints left.",
+        "retry": "Try again"
+      },
+      "meta": {
+        "reason": {
+          "new": "New",
+          "review": "Review",
+          "remedial": "Remedial",
+          "requeue": "Retry"
+        },
+        "runCount": "{count, plural, one {# test run} other {# test runs}}"
+      }
+    },
+    "runtime": {
+      "label": "Runtime",
+      "state": {
+        "provisioning": "Preparing the code runner…",
+        "provisioningProgress": "Preparing the code runner… {progress}",
+        "ready": "Code runner ready",
+        "running": "Running tests…",
+        "timedOut": "Timed out; the runner was restarted",
+        "failed": "Code runner unavailable",
+        "noRunner": "No code runner"
+      },
+      "detail": {
+        "timedOutJob": "The run exceeded its time budget. Look for an infinite loop or a blocking call.",
+        "timedOutImport": "Importing your module timed out. Check the code at module level.",
+        "sandboxFailed": "The code runner couldn't start.",
+        "pythonMissing": "Python 3.12 or newer wasn't found.",
+        "harnessError": "The test harness itself failed. This isn't a problem with your code.",
+        "noRunner": "This build can't run code. Items that need tests are skipped.",
+        "hostUnreachable": "Can't reach the code runner."
+      },
+      "elapsed": "{seconds} s elapsed",
+      "retry": "Retry"
+    },
+    "tests": {
+      "title": "Test results",
+      "empty": "No tests run yet.",
+      "running": "Running tests…",
+      "summary": "{passed} of {total} tests passed",
+      "allPassed": "All passed",
+      "someFailed": "{count, plural, one {# failed} other {# failed}}",
+      "hidden": "Hidden",
+      "outcome": {
+        "pass": "Passed",
+        "assert": "Assertion failed",
+        "error": "Error",
+        "timeout": "Timed out"
+      },
+      "ms": "{ms} ms",
+      "location": "{file}, line {line}",
+      "locationCol": "{file}, line {line}, column {col}",
+      "frames": "Call stack",
+      "frame": "{file}:{line} in {fn}",
+      "traceback": "Show traceback",
+      "testTimeout": "This test ran out of its step budget, which usually means an infinite loop.",
+      "stdout": "Standard output",
+      "stderr": "Standard error",
+      "truncated": "Showing the first {count} of {total} lines",
+      "showAll": "Show all {count, plural, one {# line} other {# lines}}",
+      "showLess": "Show less",
+      "compileError": "Syntax error; the tests didn't run",
+      "importError": "Import failed; the tests didn't run",
+      "jobTimeout": "Timed out before the tests finished",
+      "jobTimeoutBody": "The run exceeded its time budget. Look for an infinite loop, an unbounded wait or a blocking call.",
+      "importTimeout": "Import timed out; the tests didn't run",
+      "importTimeoutBody": "Importing your module timed out. Keep slow work out of module level.",
+      "harnessError": "The test harness failed",
+      "harnessErrorBody": "This isn't a problem with your code, and this run won't be scored.",
+      "unavailable": "No runtime available",
+      "unavailableBody": "This item needs a code runner, and this build has none.",
+      "noOutput": "No output.",
+      "scriptException": "The program raised an exception"
+    },
+    "mutants": {
+      "title": "Mutants",
+      "summary": "{killed} of {total} killed",
+      "target": "Target: kill at least {target}",
+      "targetMet": "Target met",
+      "targetMissed": "Below target",
+      "killed": "Killed",
+      "killedBy": "Killed by {test}",
+      "survived": "Survived",
+      "referenceFailedTitle": "Your tests fail on the reference",
+      "referenceFailed": "Only {passed} of {total} of your tests pass on the correct code. Make them green on the reference first; mutant scores mean nothing until then."
+    },
+    "rubric": {
+      "title": "Rubric",
+      "total": "Score {value}",
+      "passAt": "Pass mark {value}",
+      "scoreAria": "Scored {value}",
+      "evidence": "Evidence",
+      "noEvidence": "Nothing in the answer addressed this.",
+      "selfTitle": "Grade yourself against the model answer",
+      "selfBody": "Read the model answer, check yours against the points below, and pick the closest grade.",
+      "modelAnswer": "Model answer",
+      "mentions": "Should mention {terms}",
+      "gradeLegend": "How did you do?",
+      "grade": {
+        "again": "Missed it",
+        "hard": "Barely",
+        "good": "Got it",
+        "easy": "Easy"
+      }
+    },
+    "editor": {
+      "loading": "Loading the editor…",
+      "readOnlyLabel": "{path} (read-only)",
+      "keyboardHint": "Tab indents · press Esc, then Tab, to leave the editor"
+    },
+    "items": {
+      "yourAnswer": "Your answer",
+      "expected": "Actual result",
+      "matches": "Matches",
+      "differs": "Differs",
+      "predict": {
+        "choiceLegend": "What does it print?",
+        "optionLabel": "Option {letter}",
+        "outputLabel": "Your predicted output",
+        "outputPlaceholder": "Write each printed line",
+        "outputHint": "Trailing spaces and line-ending style don't affect grading.",
+        "exceptionLabel": "Which exception is raised?",
+        "exceptionPlaceholder": "e.g. KeyError",
+        "noAnswer": "(no answer)",
+        "schedule": "Thread schedule",
+        "reveal": {
+          "correct": "Correct",
+          "incorrect": "Incorrect",
+          "missed": "Correct answer"
+        }
+      },
+      "spotBug": {
+        "instructions": "Select the faulty lines; more than one is allowed. Keyboard: arrow keys move, Space or Enter selects.",
+        "keyboard": "Use the up and down arrow keys to move between lines. Press Space or Enter to select or clear the current line.",
+        "lineSelected": "Line {line} selected",
+        "lineCleared": "Line {line} cleared",
+        "selectedSummary": "{count, plural, =0 {No line selected yet} one {# line selected} other {# lines selected}}",
+        "revealTitle": "Bug hunt result",
+        "found": "Found",
+        "missed": "Missed",
+        "falsePositive": "Not a bug",
+        "bugAt": "{path}, line {lines}",
+        "lineAt": "{path}, line {line}",
+        "foundSummary": "Found {found} of {total} bugs",
+        "diagnosticFound": "The bug is here — you found it",
+        "diagnosticMissed": "The bug is here — you missed it",
+        "diagnosticFalse": "This line is fine"
+      },
+      "fillBlank": {
+        "editorLabel": "{path} fill-in editor",
+        "progress": "{filled} of {total} blanks filled",
+        "revealTitle": "Blank results",
+        "blankName": "Blank {id}",
+        "empty": "(empty)",
+        "accepted": "Accepted answer"
+      },
+      "parsons": {
+        "answerRegion": "Your answer (in execution order)",
+        "poolRegion": "Available lines (including distractors)",
+        "instructions": "Arrow keys move focus. Alt+Up/Down moves the line. Delete returns it to the pool; Enter in the pool adds a line to the answer.",
+        "instructionsIndent": "Arrow keys move focus. Alt+Up/Down moves the line. Alt+Left/Right changes indent. Delete returns it to the pool; Enter in the pool adds a line to the answer.",
+        "emptyAnswer": "Drag lines here, or press Enter on a line below",
+        "emptyPool": "Every line is in use",
+        "itemName": "Line {position} of {total}, indent {indent}: {code}",
+        "moved": "Moved to position {position} of {total}: {code}",
+        "indented": "Indent {level}: {code}",
+        "movedToPool": "Returned to the pool: {code}",
+        "movedToAnswer": "Added at position {position} of {total}: {code}",
+        "indentIncrease": "Indent",
+        "indentDecrease": "Outdent",
+        "moveToPool": "Return to pool",
+        "moveToAnswer": "Add to answer",
+        "revealCorrect": "Correct position",
+        "revealIncorrect": "Wrong position or indent",
+        "solution": "One correct order",
+        "revealIndent": "Right place, wrong indentation",
+        "indentHint": "Indentation: one press = one Python level (4 spaces). Use the indent buttons on each line, or Alt+→ / Alt+← on a line.",
+        "noteIndent": "Right place, but it belongs at level {expected} ({spaces} spaces); you put it at level {actual}.",
+        "noteDistractor": "This is a distractor. The correct line is <code>{correct}</code>",
+        "noteDistractorGeneric": "This is a distractor; the solution doesn't use this line.",
+        "notePosition": "This line is in the wrong position."
+      },
+      "chooseDesign": {
+        "scenario": "Scenario",
+        "legendSingle": "Pick the design that absorbs this change best",
+        "legendMulti": "Pick every design that works (select all that apply)",
+        "rationaleLabel": "Rationale (optional)",
+        "rationalePlaceholder": "In a sentence or two: why does this design survive the next requirement?",
+        "reveal": {
+          "correct": "Correct",
+          "incorrect": "Doesn't fit",
+          "missed": "Good design you missed"
+        }
+      },
+      "implement": {
+        "filesLabel": "Files",
+        "editorLabel": "{path} code editor",
+        "reset": "Reset to starter",
+        "solutionTab": "Reference · {path}"
+      },
+      "explain": {
+        "question": "Question",
+        "answerLabel": "Your answer",
+        "placeholder": "Two or three sentences: the claim, the reason, the cost.",
+        "charCount": "{count, plural, one {# character} other {# characters}}",
+        "modelAnswer": "Model answer"
+      },
+      "refactor": {
+        "newRequirement": "New requirement",
+        "publicApi": "Public API that must not change",
+        "filesLabel": "Refactor files",
+        "solutionTab": "Reference: {path}",
+        "changedLines": "{count, plural, one {# line changed} other {# lines changed}} from the baseline",
+        "changedLinesOf": "{count, plural, one {# line changed} other {# lines changed}} from the baseline (aim for about {limit})",
+        "splitLabel": "Existing tests and new tests",
+        "oldTests": "Existing tests",
+        "newTests": "New requirement tests",
+        "passedOf": "{passed} of {total} pass"
+      },
+      "writeTests": {
+        "spec": "Specification",
+        "target": "{count, plural, one {# planted wrong implementation} other {# planted wrong implementations}}; kill at least {target}.",
+        "filesLabel": "Test files",
+        "mutantHidden": "Planted wrong implementation (described after the attempt)"
+      },
+      "review": {
+        "instructions": "Select a line in the diff to add a finding, then choose its severity and category. Keyboard: arrow keys move, Enter or Space selects.",
+        "diffLabel": "Change under review",
+        "lineName": "{kind, select, add {Added line} del {Removed line} other {Line}} {line}: {code}",
+        "commented": "Has a finding",
+        "hit": "Found",
+        "missed": "Missed",
+        "falsePositive": "Not an issue",
+        "emptyDiff": "This diff is empty.",
+        "context": "Full file after the change",
+        "findingsTitle": "Your findings",
+        "findingsCount": "{count, plural, =0 {No findings} one {# finding} other {# findings}}, {complete} complete",
+        "noFindings": "No findings yet. Select a line in the diff to add one.",
+        "findingAt": "{path}:{line}",
+        "removeFinding": "Remove the finding on line {line}",
+        "severityLabel": "Severity",
+        "categoryLabel": "Category",
+        "categoryPlaceholder": "Choose a category",
+        "noSeverity": "No severity",
+        "noCategory": "No category",
+        "editingInline": "Editing the finding on line {line} in the diff",
+        "issuesTitle": "Planted issues",
+        "severityWrong": "severity differs",
+        "categoryWrong": "category differs",
+        "bothWrong": "severity and category differ",
+        "severity": {
+          "blocker": "Blocker",
+          "major": "Major",
+          "minor": "Minor"
+        },
+        "category": {
+          "correctness": "Correctness",
+          "state": "State and mutation",
+          "error-handling": "Error handling",
+          "concurrency": "Concurrency",
+          "performance": "Performance",
+          "security": "Security",
+          "api": "API design",
+          "testing": "Testing",
+          "readability": "Readability"
+        }
+      },
+      "ladder": {
+        "levelsLabel": "Ladder levels",
+        "levelNumber": "Level {number}",
+        "lockedTitle": "Unlocks after the previous level",
+        "timebox": "{minutes} min",
+        "timeUsed": "{used} of {minutes} min",
+        "overtime": "Overtime",
+        "failedRuns": "{count, plural, one {# failed run} other {# failed runs}}",
+        "status": {
+          "locked": "Locked",
+          "active": "In progress",
+          "passed": "Passed",
+          "failed": "Not passed",
+          "skipped": "Skipped"
+        },
+        "countdown": {
+          "name": "Level {level} time remaining",
+          "warning": "Almost out of time",
+          "overtime": "Overtime",
+          "paused": "Paused",
+          "announceWarning": "Less than a fifth of this level's time is left.",
+          "announceOvertime": "This level is now in overtime. You can keep going; the extra time is recorded."
+        },
+        "filesLabel": "Ladder files",
+        "solutionTab": "Reference: {path}",
+        "earlierLevels": "{count, plural, one {# earlier level} other {# earlier levels}}",
+        "levelHeading": "Level {number}: {title}",
+        "skipLevel": "Skip to the next level",
+        "skipLast": "Skip and finish",
+        "levelTests": "Level {number} tests"
+      },
+      "case": {
+        "scenario": "Scenario",
+        "clock": "About {minutes} min left in this round",
+        "stage": "Stage {index} of {total}",
+        "twist": "New constraint",
+        "answerLabel": "Your answer",
+        "placeholder": "Answer as you would out loud: the conclusion first, then the reasons and the cost.",
+        "moreStages": "{count, plural, one {# more follow-up; it appears once you answer this stage} other {# more follow-ups; each appears once you answer the stage before}}"
+      }
+    },
+    "summary": {
+      "title": {
+        "perfect": "Perfect session!",
+        "good": "Session complete",
+        "rough": "Done — tomorrow gets easier"
+      },
+      "subtitle": "{passed} of {count, plural, one {# item} other {# items}} correct",
+      "xpLabel": "XP earned",
+      "xp": "{count, plural, other {+# XP}}",
+      "xpBonus": "{count, plural, other {Includes a # XP completion bonus}}",
+      "goal": "{xp} / {goal} XP today",
+      "accuracyLabel": "Accuracy",
+      "noValue": "—",
+      "items": "{passed} / {count, plural, one {# item} other {# items}}",
+      "timeLabel": "Time",
+      "durationMinutes": "{minutes}m {seconds}s",
+      "durationSeconds": "{seconds}s",
+      "activeTime": "Active answering time",
+      "streakAria": "{count, plural, one {# day streak} other {# day streak}}",
+      "streak": {
+        "extended": "Streak extended to {count, plural, one {# day} other {# days}}",
+        "keptByFreeze": "A freeze saved your {count, plural, one {# day} other {# day}} streak",
+        "reset": "Streak restarted: {count, plural, one {day #} other {day #}}",
+        "unchanged": "Today already counted: {count, plural, one {# day} other {# days}}"
+      },
+      "freezeEarned": "You earned a streak freeze; you now have {count}",
+      "freezesLeft": "{count, plural, =0 {No freezes left} one {# freeze left} other {# freezes left}}",
+      "kcTitle": "Skills strengthened",
+      "kcEmpty": "No skill changed this session.",
+      "kcAria": "{title}: recall probability from {before} to {after}",
+      "kcValues": "{before} → {after}",
+      "masteryAria": "Mastery from {before} to {after}",
+      "remedialTitle": "Remedial pack",
+      "remedialBody": "{count, plural, one {# short item} other {# short items}} on the skills you missed today, while they're fresh.",
+      "remedialStart": "Start remedial",
+      "continue": "Continue"
+    },
+    "heatmap": {
+      "title": "Skill heatmap",
+      "legend": "Legend",
+      "band": {
+        "unseen": "Not started",
+        "weak": "Weak",
+        "fading": "Fading",
+        "solid": "Solid",
+        "strong": "Strong"
+      },
+      "bandRange": {
+        "unseen": "never practised",
+        "weak": "below 50%",
+        "fading": "50–70%",
+        "solid": "70–90%",
+        "strong": "90% and up"
+      },
+      "due": "Due",
+      "empty": "No skill practised yet. Finish your first lesson and this map lights up.",
+      "kcCount": "{count, plural, one {# skill} other {# skills}}",
+      "cellUnseen": "{title}: not started",
+      "cellAria": "{title}: {band}, recall {p}, mastery {mastery}{due, select, yes {, due} other {}}"
+    },
+    "review": {
+      "title": "Review queue",
+      "practiceAll": "{count, plural, =0 {Nothing to review} one {Review only (#)} other {Review only (#)}}",
+      "emptyTitle": "No reviews due",
+      "emptyBody": "Every skill is still fresh.",
+      "group": {
+        "remedial": "In remediation",
+        "due": "Due",
+        "upcoming": "Coming up"
+      },
+      "recall": "Recall {value}",
+      "dueSince": "Due {when}",
+      "dueIn": "Due {when}",
+      "remedialUntil": "Remediation ends {when}",
+      "practiceOne": "Practise",
+      "practiceOneAria": "Practise {title}"
+    },
+    "series": {
+      "label": "Choose a series",
+      "progress": "{done} of {total} {total, plural, one {unit} other {units}} complete"
+    },
+    "judge": {
+      "title": "Rubric verdicts",
+      "bySelf": "Self-check",
+      "mentions": "Should mention: {terms}",
+      "toggleLabel": "Verdict: {criterion}",
+      "met": "Met",
+      "notMet": "Not met",
+      "showModel": "Show model answer",
+      "hideModel": "Hide model answer",
+      "gradeLegend": "How did it go?",
+      "suggested": "Suggested",
+      "gradeNote": "The suggestion goes up to Good at most; only you can choose Easy.",
+      "nextStage": "Next stage",
+      "grade": {
+        "again": "Didn't know",
+        "hard": "Barely",
+        "good": "Got it",
+        "easy": "Easy"
+      },
+      "selfHint": "Read the model answer, then mark each criterion your answer meets.",
+      "decidedByPhrase": "Decided by the phrase check: your answer contains a phrase this criterion rules out."
+    },
+    "needsRunner": {
+      "title": "This item runs code",
+      "body": "Its answer is checked by running hidden tests, and this build has no code runner. Skip it for now; the session continues with items that don't need one."
+    },
+    "simulation": {
+      "eyebrow": "Timed case",
+      "minutes": "{count, plural, one {# minute} other {# minutes}}",
+      "start": "Start the timed case"
+    }
+  },
+  "app": {
+    "title": "Dojo",
+    "tabs": {
+      "label": "Dojo views",
+      "path": "Path",
+      "skills": "Skills",
+      "review": "Review",
+      "simulation": "Simulation"
+    },
+    "loading": "Loading the dojo…",
+    "loadError": {
+      "title": "The dojo couldn't load",
+      "content": "The content couldn't be loaded. Check your connection and try again.",
+      "state": "Your progress couldn't be read from this browser.",
+      "retry": "Try again"
+    },
+    "emptyContent": {
+      "title": "No practice content yet",
+      "body": "No series is installed. Add content under content/series/ and run `npm run content:build`."
+    },
+    "session": {
+      "starting": "Preparing your session…",
+      "empty": "Nothing to practise here right now: every skill in it is still fresh, or its items need a code runner.",
+      "startError": "The session couldn't start.",
+      "finishing": "Saving your session…",
+      "finishError": "Some answers couldn't be saved on this device yet, so the session can't be closed.",
+      "finishRetry": "Try again",
+      "dismiss": "Dismiss"
+    },
+    "sync": {
+      "pending": "Saving {count, plural, one {# answer} other {# answers}}…",
+      "failing": "This browser couldn't save your last answer (private mode or storage full). Export your progress before closing the tab."
+    },
+    "simulation": {
+      "title": "Timed cases",
+      "body": "Staged cases you answer here against the clock: each follow-up appears after the stage before, and you check each stage against its rubric.",
+      "empty": "This content has no timed case yet.",
+      "loading": "Loading timed cases…",
+      "loadError": "The timed cases couldn't be loaded."
+    },
+    "errors": {
+      "NETWORK": "Couldn't reach the content files. Check your connection and try again.",
+      "CONTENT_INVALID": "The content files are invalid. Rebuild them with `npm run content:build`.",
+      "CONTENT_EMPTY": "No content is installed yet.",
+      "NOT_FOUND": "That session no longer exists on this device.",
+      "SESSION_CLOSED": "That session was already closed.",
+      "STORAGE": "This browser refused to save your progress (private mode or storage full).",
+      "INVALID_SIGNAL": "That answer couldn't be recorded."
+    }
+  },
+  "shell": {
+    "language": "Language",
+    "openData": "Your data",
+    "closeData": "Close",
+    "data": {
+      "title": "Your progress",
+      "whereDurable": "Your progress is stored only in this browser, on this device. Nothing is sent anywhere. Export it to move it to another device.",
+      "whereMemory": "This browser isn't letting the app store data (private mode?), so progress is lost when you close the tab. Export it before you leave.",
+      "summary": "{totalXp} XP · {attempts} answers · {kcs} skills tracked",
+      "export": "Export",
+      "import": "Import",
+      "imported": "Progress imported.",
+      "importError": {
+        "format": "That file isn't a Dojo progress export.",
+        "version": "That export comes from an incompatible version of the app."
+      },
+      "reset": "Start over",
+      "resetConfirm": "Delete all progress",
+      "resetDone": "Progress deleted.",
+      "cancel": "Cancel"
+    }
+  }
+}

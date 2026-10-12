@@ -1,0 +1,29 @@
+{
+  "id": "dj-sample-parsons-top-k",
+  "version": 1,
+  "type": "parsons",
+  "lesson": "_sample-l1",
+  "kcs": [{ "id": "_sample-sort-key", "weight": 1 }],
+  "archetype": "python-core",
+  "skin": "leaderboard",
+  "difficulty": 1,
+  "estSeconds": 50,
+  "runtime": "sandbox",
+  "prompt": {
+    "zh-CN": "排出 `top_k`：按分数从高到低返回前 k 个名字，同分按名字升序。有一行是干扰项。",
+    "en-US": "Arrange `top_k`: return the k highest-scoring names, ties broken by name ascending. One line is a distractor."
+  },
+  "explanation": {
+    "zh-CN": "键 `(-score, name)` 一次排序就同时满足“分数降序”和“同分名字升序”；`reverse=True` 会把名字也倒过来。",
+    "en-US": "The key `(-score, name)` gives score-descending and name-ascending in one sort; `reverse=True` would reverse the names as well."
+  },
+  "hints": [
+    { "zh-CN": "函数签名永远在第一行。", "en-US": "The signature always comes first." }
+  ],
+  "solution": "solution.py",
+  "distractors": [
+    { "id": "d1", "code": "ranked = sorted(scores.items(), key=lambda kv: (kv[1], kv[0]), reverse=True)", "replaces": 2 }
+  ],
+  "requireIndent": true,
+  "tests": { "tests": "tests.py", "options": { "seed": 0, "fakeClock": false, "stepBudget": 200000, "wallMs": 4000, "asyncTests": false } }
+}

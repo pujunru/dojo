@@ -1,0 +1,36 @@
+{
+  "id": "dj-sample-adv-write-tests-top-spenders",
+  "version": 1,
+  "type": "write-tests",
+  "lesson": "_adv-l1",
+  "kcs": [{ "id": "_adv-top-k-ties", "weight": 1 }, { "id": "_adv-mutation-thinking", "weight": 0.5 }],
+  "archetype": "scheduling-ledger",
+  "skin": "bank",
+  "difficulty": 2,
+  "estSeconds": 420,
+  "runtime": "sandbox",
+  "prompt": {
+    "zh-CN": "为 `top_spenders` 写测试。你的测试必须先在参考实现上全绿，然后尽量杀死预埋的错误实现。",
+    "en-US": "Write tests for `top_spenders`. They must pass on the reference implementation first, then kill as many planted wrong implementations as they can."
+  },
+  "spec": {
+    "zh-CN": "`top_spenders(transfers, accounts, n)`：`transfers` 是 `(source, target, amount)`。返回前 `n` 个账户，格式 `\"id(累计转出)\"`；按累计转出降序，并列按 id 升序；没转出过的账户算 0，也参与排行。",
+    "en-US": "`top_spenders(transfers, accounts, n)`: `transfers` are `(source, target, amount)`. Returns the first `n` accounts as `\"id(total outgoing)\"`, by total descending, ties by id ascending; accounts with no outgoing transfer count as 0 and still rank."
+  },
+  "explanation": {
+    "zh-CN": "四个变异体各对应一句规格：并列方向、恰好 `n` 个、同一账户多笔求和、零支出账户也要出现。每句规格至少要有一条测试把它钉死。",
+    "en-US": "Each of the four mutants breaks one clause of the spec: tie direction, exactly `n` results, summing repeated transfers, and zero-spend accounts still ranking. Every clause needs at least one test that pins it."
+  },
+  "hints": [
+    { "zh-CN": "规格里有几个“并且”？每个都写一条测试。", "en-US": "How many clauses does the spec have? Write one test per clause." },
+    { "zh-CN": "让两个账户支出相同，看谁排前面。", "en-US": "Give two accounts the same total and check who comes first." }
+  ],
+  "mutants": [
+    { "id": "tie-desc", "kcs": ["_adv-top-k-ties"], "description": { "zh-CN": "并列时按 id 降序", "en-US": "Breaks ties by id descending" } },
+    { "id": "off-by-one", "kcs": ["_adv-mutation-thinking"], "description": { "zh-CN": "只返回 `n - 1` 个", "en-US": "Returns only `n - 1` accounts" } },
+    { "id": "last-amount", "kcs": ["_adv-top-k-ties"], "description": { "zh-CN": "用最后一笔金额覆盖而不是累加", "en-US": "Keeps the last amount instead of summing" } },
+    { "id": "drops-zero", "kcs": ["_adv-mutation-thinking"], "description": { "zh-CN": "没转出过的账户不出现", "en-US": "Leaves out accounts that never sent money" } }
+  ],
+  "killTarget": 0.75,
+  "options": { "seed": 0, "fakeClock": false, "stepBudget": 200000, "wallMs": 4000, "asyncTests": false }
+}

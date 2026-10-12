@@ -1,0 +1,161 @@
+{
+  "id": "dj-demo-case-launch-review",
+  "version": 1,
+  "type": "case",
+  "lesson": "l-eval-basics-1",
+  "kcs": [
+    {
+      "id": "eval-clarify",
+      "weight": 1
+    },
+    {
+      "id": "eval-contamination",
+      "weight": 0.5
+    },
+    {
+      "id": "eval-metric-choice",
+      "weight": 0.5
+    }
+  ],
+  "archetype": "eval-design",
+  "skin": "chatbot-launch",
+  "difficulty": 4,
+  "estSeconds": 1500,
+  "runtime": "none",
+  "simulation": {
+    "minutes": 25
+  },
+  "prompt": {
+    "zh-CN": "模拟面试：25 分钟，三段。",
+    "en-US": "Mock interview: 25 minutes, three stages."
+  },
+  "explanation": {
+    "zh-CN": "这一轮考的是从决策倒推评测、守住数据污染、再把指标和门禁对上。",
+    "en-US": "This round tests working back from the decision, guarding against contamination, and tying metrics to the launch gate."
+  },
+  "hints": [],
+  "scenario": {
+    "zh-CN": "你在一家做编程助手的公司。新模型在公开基准上涨了 6 分，产品经理想直接发布。你是评测负责人。",
+    "en-US": "You work on a coding assistant. A new model gained 6 points on a public benchmark and the PM wants to ship it. You lead evals."
+  },
+  "stages": [
+    {
+      "id": "first-questions",
+      "question": {
+        "zh-CN": "发布前你先问哪几个问题？",
+        "en-US": "Which questions do you ask before shipping?"
+      },
+      "rubric": {
+        "passAt": 0.6,
+        "criteria": [
+          {
+            "id": "decision",
+            "kcs": [
+              "eval-clarify"
+            ],
+            "weight": 2,
+            "description": {
+              "zh-CN": "问清这次评测要支撑的决策和现网基线",
+              "en-US": "Asks which decision the eval supports and what the production baseline is"
+            }
+          },
+          {
+            "id": "users",
+            "kcs": [
+              "eval-clarify"
+            ],
+            "weight": 1,
+            "description": {
+              "zh-CN": "问公开基准和真实用户任务有多像",
+              "en-US": "Asks how close the public benchmark is to real user tasks"
+            }
+          }
+        ]
+      },
+      "modelAnswer": {
+        "zh-CN": "先问：这次是替换现网还是灰度试验？现网模型在同一份数据上是多少？公开基准的任务和我们用户真正写的代码有多像？",
+        "en-US": "First: is this replacing production or a canary? What does the production model score on the same data? How close are the benchmark's tasks to the code our users actually write?"
+      }
+    },
+    {
+      "id": "contamination",
+      "question": {
+        "zh-CN": "**新信息**：基准题目在网上公开两年了。你怎么判断这 6 分是不是污染带来的？",
+        "en-US": "**New information**: the benchmark has been public for two years. How do you tell whether the 6 points come from contamination?"
+      },
+      "rubric": {
+        "passAt": 0.6,
+        "criteria": [
+          {
+            "id": "overlap",
+            "kcs": [
+              "eval-contamination"
+            ],
+            "weight": 2,
+            "description": {
+              "zh-CN": "检查训练数据和题目的重叠（n-gram 或去重）",
+              "en-US": "Checks overlap between training data and the items (n-grams or dedup)"
+            }
+          },
+          {
+            "id": "fresh",
+            "kcs": [
+              "eval-contamination"
+            ],
+            "weight": 1,
+            "description": {
+              "zh-CN": "用训练截止之后的新题或改写题复测",
+              "en-US": "Re-tests on items newer than the training cutoff, or rewritten items"
+            }
+          }
+        ]
+      },
+      "modelAnswer": {
+        "zh-CN": "先查训练数据和基准题的 n-gram 重叠；再用训练截止之后的新题，或者改写过的题复测。如果新题上涨幅消失，这 6 分大概率来自污染。",
+        "en-US": "Check n-gram overlap between the training data and the benchmark items, then re-test on items newer than the training cutoff, or on rewritten items. If the gain disappears on fresh items, the 6 points are most likely contamination."
+      }
+    },
+    {
+      "id": "gate",
+      "question": {
+        "zh-CN": "最后给出发布门禁：满足什么才发？",
+        "en-US": "Finally, state the launch gate: what must hold to ship?"
+      },
+      "rubric": {
+        "passAt": 0.6,
+        "criteria": [
+          {
+            "id": "product-metric",
+            "kcs": [
+              "eval-metric-choice"
+            ],
+            "weight": 2,
+            "description": {
+              "zh-CN": "门禁用产品指标（如任务完成率），在真实流量切片上和基线比较",
+              "en-US": "The gate uses a product metric (e.g. task completion) compared with the baseline on real-traffic slices"
+            }
+          },
+          {
+            "id": "no-benchmark-only",
+            "kcs": [
+              "eval-metric-choice"
+            ],
+            "weight": 1,
+            "description": {
+              "zh-CN": "不只拿公开基准分数当发布条件",
+              "en-US": "Does not use the public benchmark score alone as the launch condition"
+            },
+            "forbidden": [
+              "only the benchmark",
+              "只看基准"
+            ]
+          }
+        ]
+      },
+      "modelAnswer": {
+        "zh-CN": "门禁：在真实流量分层样本上，任务完成率不低于基线，且各主要语言切片都不退步；灰度一周内升级率不升。基准分只作参考。",
+        "en-US": "Gate: on a stratified sample of real traffic, task completion is at least the baseline and no major language slice regresses; escalation does not rise during a one-week canary. The benchmark is a reference only."
+      }
+    }
+  ]
+}

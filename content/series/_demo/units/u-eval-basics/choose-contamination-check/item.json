@@ -1,0 +1,74 @@
+{
+  "id": "dj-demo-choose-contamination-check",
+  "version": 1,
+  "type": "choose-design",
+  "lesson": "l-eval-basics-1",
+  "kcs": [
+    {
+      "id": "eval-contamination",
+      "weight": 1
+    }
+  ],
+  "archetype": "eval-design",
+  "skin": "open-model",
+  "difficulty": 2,
+  "estSeconds": 75,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "一个开源模型在某公开数学 benchmark 上分数异常高。最先做什么？",
+    "en-US": "An open model scores suspiciously high on a public math benchmark. What do you do first?"
+  },
+  "scenario": {
+    "zh-CN": "模型的预训练数据没有公开。",
+    "en-US": "Its pretraining data is not public."
+  },
+  "options": [
+    {
+      "id": "perturb",
+      "text": {
+        "zh-CN": "对题目做改写或换数值，看分数是否明显下降",
+        "en-US": "Rewrite or re-number the problems and see whether the score drops"
+      },
+      "correct": true,
+      "why": {
+        "zh-CN": "污染的典型信号是对原题记忆好、对等价改写差；不需要训练数据也能测。",
+        "en-US": "Contamination shows as recalling the originals but failing equivalent rewrites; testable without the training data."
+      }
+    },
+    {
+      "id": "trust",
+      "text": {
+        "zh-CN": "直接采信，换个 benchmark 再跑一次",
+        "en-US": "Accept it and run another benchmark"
+      },
+      "correct": false,
+      "why": {
+        "zh-CN": "另一个公开集也可能被污染，问题没有被检验。",
+        "en-US": "Another public set may be contaminated too; the question is never tested."
+      }
+    },
+    {
+      "id": "bigger",
+      "text": {
+        "zh-CN": "加大样本量重跑",
+        "en-US": "Rerun with a larger sample"
+      },
+      "correct": false,
+      "why": {
+        "zh-CN": "样本量解决方差，不解决污染。",
+        "en-US": "Sample size addresses variance, not contamination."
+      }
+    }
+  ],
+  "multi": false,
+  "explanation": {
+    "zh-CN": "用扰动后的等价题区分“会做”和“背过”。",
+    "en-US": "Equivalent perturbed problems separate solving from memorising."
+  },
+  "hints": [
+    {
+      "zh-CN": "背过答案和会做题，在改写后表现有什么不同？",
+      "en-US": "How do memorising and solving differ under rewriting?"
+    }
+  ]
+}

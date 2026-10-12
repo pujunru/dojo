@@ -1,0 +1,103 @@
+{
+  "version": "demo-1",
+  "tiers": [
+    {
+      "id": "t-eval",
+      "title_zh": "评测基础",
+      "title_en": "Eval foundations",
+      "order": 1
+    }
+  ],
+  "units": [
+    {
+      "id": "u-eval-basics",
+      "tier": "t-eval",
+      "order": 1,
+      "title_zh": "从场景到评测方案",
+      "title_en": "From scenario to eval plan",
+      "goal_zh": "拿到一个评测场景时，先问对问题，再选数据和指标。",
+      "goal_en": "Given an eval scenario, ask the right questions first, then choose data and metrics.",
+      "prereqUnits": [],
+      "kcs": [
+        "eval-clarify",
+        "eval-contamination",
+        "eval-metric-choice"
+      ],
+      "lessons": [
+        {
+          "id": "l-eval-basics-1",
+          "title_zh": "先问什么",
+          "title_en": "What to ask first",
+          "minutes": 8,
+          "kcs": [
+            "eval-clarify",
+            "eval-contamination"
+          ],
+          "itemTypes": [
+            "choose-design",
+            "explain",
+            "case"
+          ]
+        },
+        {
+          "id": "l-eval-basics-2",
+          "title_zh": "指标怎么选",
+          "title_en": "Choosing the metric",
+          "minutes": 8,
+          "kcs": [
+            "eval-metric-choice"
+          ],
+          "itemTypes": [
+            "choose-design",
+            "explain"
+          ]
+        }
+      ],
+      "checkpoint": null,
+      "exit": []
+    }
+  ],
+  "kcs": [
+    {
+      "id": "eval-clarify",
+      "title_zh": "澄清评测目标与决策",
+      "title_en": "Clarify the decision the eval informs",
+      "area": "eval",
+      "prereqs": [],
+      "itemTypes": [
+        "choose-design",
+        "explain"
+      ],
+      "payoff": []
+    },
+    {
+      "id": "eval-contamination",
+      "title_zh": "识别数据污染",
+      "title_en": "Spot benchmark contamination",
+      "area": "eval",
+      "prereqs": [
+        "eval-clarify"
+      ],
+      "itemTypes": [
+        "choose-design",
+        "explain"
+      ],
+      "payoff": []
+    },
+    {
+      "id": "eval-metric-choice",
+      "title_zh": "按决策选指标",
+      "title_en": "Pick metrics for the decision",
+      "area": "eval",
+      "prereqs": [
+        "eval-clarify"
+      ],
+      "itemTypes": [
+        "choose-design",
+        "explain"
+      ],
+      "payoff": []
+    }
+  ],
+  "coverage": []
+}

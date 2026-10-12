@@ -1,0 +1,37 @@
+{
+  "version": "fixture-1",
+  "tiers": [{ "id": "_t-sample", "title_zh": "示例层", "title_en": "Sample tier", "order": 99 }],
+  "units": [
+    {
+      "id": "_sample",
+      "tier": "_t-sample",
+      "order": 1,
+      "title_zh": "内容管线示例单元",
+      "title_en": "Content pipeline sample unit",
+      "goal_zh": "每种 MVP 题型各一道，证明构建与校验管线可用；不进入生产 manifest。",
+      "goal_en": "One item of every MVP type, proving the build and validation pipeline; never shipped to production.",
+      "prereqUnits": [],
+      "kcs": ["_sample-dict-count", "_sample-sort-key", "_sample-mutable-default", "_sample-ttl-boundary", "_sample-clock-injection"],
+      "lessons": [
+        {
+          "id": "_sample-l1",
+          "title_zh": "示例课",
+          "title_en": "Sample lesson",
+          "minutes": 10,
+          "kcs": ["_sample-dict-count", "_sample-sort-key", "_sample-mutable-default", "_sample-ttl-boundary", "_sample-clock-injection"],
+          "itemTypes": ["predict", "spot-bug", "fill-blank", "parsons", "choose-design", "implement", "explain"]
+        }
+      ],
+      "checkpoint": null,
+      "exit": []
+    }
+  ],
+  "kcs": [
+    { "id": "_sample-dict-count", "title_zh": "dict 计数", "title_en": "Counting with dict.get", "area": "py", "prereqs": [], "itemTypes": ["predict", "parsons"], "payoff": [] },
+    { "id": "_sample-sort-key", "title_zh": "多键排序", "title_en": "Multi-key sort", "area": "py", "prereqs": [], "itemTypes": ["predict", "parsons"], "payoff": [] },
+    { "id": "_sample-mutable-default", "title_zh": "可变默认参数", "title_en": "Mutable default arguments", "area": "py", "prereqs": [], "itemTypes": ["spot-bug"], "payoff": [] },
+    { "id": "_sample-ttl-boundary", "title_zh": "TTL 边界", "title_en": "TTL boundary", "area": "state", "prereqs": [], "itemTypes": ["fill-blank", "implement", "choose-design"], "payoff": [] },
+    { "id": "_sample-clock-injection", "title_zh": "可注入时钟", "title_en": "Injectable clock", "area": "test", "prereqs": ["_sample-ttl-boundary"], "itemTypes": ["explain", "implement"], "payoff": [] }
+  ],
+  "coverage": []
+}

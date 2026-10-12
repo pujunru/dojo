@@ -1,0 +1,52 @@
+{
+  "id": "dj-sample-explain-fake-clock",
+  "version": 1,
+  "type": "explain",
+  "lesson": "_sample-l1",
+  "kcs": [{ "id": "_sample-clock-injection", "weight": 1 }, { "id": "_sample-ttl-boundary", "weight": 0.5 }],
+  "archetype": "stateful-time",
+  "skin": "session-cache",
+  "difficulty": 2,
+  "estSeconds": 90,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "用两三句话回答下面的问题。",
+    "en-US": "Answer the question below in two or three sentences."
+  },
+  "question": {
+    "zh-CN": "为什么 TTL 类题目的测试推进假时钟，而不是调用 `time.sleep(ttl)`？",
+    "en-US": "Why do tests for TTL problems advance a fake clock instead of calling `time.sleep(ttl)`?"
+  },
+  "rubric": {
+    "criteria": [
+      {
+        "id": "determinism",
+        "kcs": ["_sample-clock-injection"],
+        "weight": 2,
+        "description": { "zh-CN": "指出真实睡眠受调度抖动影响，边界（恰好 ttl）无法稳定命中", "en-US": "Says real sleeping jitters, so the exact-ttl boundary cannot be hit reliably" }
+      },
+      {
+        "id": "speed",
+        "kcs": ["_sample-clock-injection"],
+        "weight": 1,
+        "description": { "zh-CN": "指出测试不必真的等待，几十个用例也能毫秒级跑完", "en-US": "Says tests need not actually wait, so dozens of cases still run in milliseconds" }
+      },
+      {
+        "id": "boundary",
+        "kcs": ["_sample-ttl-boundary"],
+        "weight": 1,
+        "description": { "zh-CN": "提到可以精确构造 `now == expires_at` 这一边界", "en-US": "Mentions constructing `now == expires_at` exactly" }
+      }
+    ],
+    "passAt": 0.6
+  },
+  "modelAnswer": {
+    "zh-CN": "真实睡眠既慢又不确定：调度抖动让“恰好 ttl 秒”这种边界无法稳定复现。假时钟让测试把时间精确推进到 `expires_at`，零等待、可重复，边界条件一测一个准。",
+    "en-US": "Real sleeps are slow and nondeterministic: scheduler jitter makes an exact-ttl boundary impossible to reproduce. A fake clock lets the test move time to exactly `expires_at` with zero waiting and full repeatability."
+  },
+  "explanation": {
+    "zh-CN": "这就是本题库所有时间类题目都用 `dojo.clock` 的原因：确定、快速、能精确卡边界。",
+    "en-US": "That is why every time-based item in this bank uses `dojo.clock`: deterministic, fast, and exact at the boundary."
+  },
+  "hints": []
+}

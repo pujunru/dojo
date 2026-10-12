@@ -1,0 +1,29 @@
+{
+  "id": "dj-sample-implement-ttl-cache",
+  "version": 1,
+  "type": "implement",
+  "lesson": "_sample-l1",
+  "kcs": [{ "id": "_sample-ttl-boundary", "weight": 1 }, { "id": "_sample-clock-injection", "weight": 0.5 }],
+  "archetype": "stateful-time",
+  "skin": "session-cache",
+  "difficulty": 2,
+  "estSeconds": 420,
+  "runtime": "sandbox",
+  "prompt": {
+    "zh-CN": "实现 `TTLCache`：`put(key, value)` 写入并重置该键的 TTL；`get(key, default=None)` 在写入后**恰好** `ttl_seconds` 秒起返回 `default`；`len()` 只计未过期的条目。用 `time.monotonic()` 读时间——测试会推进假时钟。",
+    "en-US": "Implement `TTLCache`: `put(key, value)` writes and resets that key's TTL; `get(key, default=None)` returns `default` from **exactly** `ttl_seconds` after the write; `len()` counts live entries only. Read time with `time.monotonic()` — the tests advance a fake clock."
+  },
+  "explanation": {
+    "zh-CN": "存 `(value, expires_at)`，读时惰性检查 `now >= expires_at`。三个常见坑：边界写成 `>`、重写时不刷新过期时间、`len` 把过期条目也算进去。",
+    "en-US": "Store `(value, expires_at)` and check `now >= expires_at` lazily on read. The three classic slips: `>` at the boundary, not refreshing the expiry on rewrite, and counting expired entries in `len`."
+  },
+  "hints": [
+    { "zh-CN": "每个键存什么，才能在读的时候判断它是否过期？", "en-US": "What must you store per key to decide expiry at read time?" },
+    { "zh-CN": "`now == expires_at` 算过期。", "en-US": "`now == expires_at` counts as expired." }
+  ],
+  "mustKill": [
+    { "id": "off-by-one", "description": { "zh-CN": "边界用 `>`，条目多活一个瞬间", "en-US": "Uses `>` at the boundary, so entries live one instant too long" } },
+    { "id": "no-overwrite", "description": { "zh-CN": "重复写入不刷新值和 TTL", "en-US": "A rewrite refreshes neither the value nor the TTL" } }
+  ],
+  "options": { "seed": 0, "fakeClock": true, "stepBudget": 200000, "wallMs": 4000, "asyncTests": false }
+}

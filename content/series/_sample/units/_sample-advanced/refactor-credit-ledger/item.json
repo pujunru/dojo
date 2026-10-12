@@ -1,0 +1,34 @@
+{
+  "id": "dj-sample-adv-refactor-credit-ledger",
+  "version": 1,
+  "type": "refactor",
+  "lesson": "_adv-l1",
+  "kcs": [{ "id": "_adv-bank-ledger", "weight": 1 }, { "id": "_adv-extension-axis", "weight": 0.5 }],
+  "archetype": "scheduling-ledger",
+  "skin": "gpu-ledger",
+  "difficulty": 3,
+  "estSeconds": 600,
+  "runtime": "sandbox",
+  "prompt": {
+    "zh-CN": "`CreditLedger` 已经在线上用了，现有测试全绿。现在要在不破坏现有接口的前提下吸收一个新需求。",
+    "en-US": "`CreditLedger` is already in production and its existing tests are green. Absorb a new requirement without breaking the existing interface."
+  },
+  "newRequirement": {
+    "zh-CN": "- `transfer(source, target, credits) -> bool`：全有或全无；余额不足返回 `False` 且不改任何状态；`credits <= 0` 或 `source == target` 抛 `ValueError`。\n- `history(team) -> list[tuple[str, int]]`：按发生顺序列出该团队的每次变动 `(kind, delta)`，`kind` 为 `grant` / `spend` / `transfer_out` / `transfer_in`，支出为负数。失败的操作不记录。",
+    "en-US": "- `transfer(source, target, credits) -> bool`: all or nothing; returns `False` and changes nothing when funds are short; raises `ValueError` for `credits <= 0` or `source == target`.\n- `history(team) -> list[tuple[str, int]]`: every change to the team, in order, as `(kind, delta)` with `kind` one of `grant` / `spend` / `transfer_out` / `transfer_in` and negative deltas for money out. Failed operations are not recorded."
+  },
+  "constraints": { "publicApi": ["grant(team, credits) -> int", "spend(team, credits) -> bool", "balance(team) -> int"], "maxChangedLinesHint": 30 },
+  "explanation": {
+    "zh-CN": "把所有余额变动收敛到一个 `_apply(team, kind, delta)`：它同时改余额、记历史，新需求就是在这条轴上扩展，而不是在三个方法里各写一份记账。失败路径必须在调用 `_apply` 之前返回。",
+    "en-US": "Route every balance change through one `_apply(team, kind, delta)` that updates the balance and the history together; the new requirement then extends along that axis instead of duplicating bookkeeping in three methods. Failure paths must return before `_apply` is called."
+  },
+  "hints": [
+    { "zh-CN": "现有三个方法里，哪几行在改余额？把它们收成一处。", "en-US": "Which lines in the three methods change a balance? Gather them into one place." },
+    { "zh-CN": "先检查，再变动：失败的转账不应留下任何历史。", "en-US": "Check first, then change: a failed transfer must leave no history." }
+  ],
+  "mustKill": [
+    { "id": "history-on-failure", "description": { "zh-CN": "先记历史再检查余额，失败的操作也留下记录", "en-US": "Records history before checking funds, so failed operations leave entries" } },
+    { "id": "one-sided-history", "description": { "zh-CN": "转账只给转出方记账，转入方没有历史", "en-US": "A transfer records only the source side; the target gets no history" } }
+  ],
+  "options": { "seed": 0, "fakeClock": false, "stepBudget": 200000, "wallMs": 4000, "asyncTests": false }
+}

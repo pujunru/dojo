@@ -1,0 +1,74 @@
+{
+  "id": "dj-demo-choose-metric-for-decision",
+  "version": 1,
+  "type": "choose-design",
+  "lesson": "l-eval-basics-2",
+  "kcs": [
+    {
+      "id": "eval-metric-choice",
+      "weight": 1
+    }
+  ],
+  "archetype": "eval-design",
+  "skin": "support-triage",
+  "difficulty": 2,
+  "estSeconds": 75,
+  "runtime": "none",
+  "prompt": {
+    "zh-CN": "客服分流模型把工单分到 12 个队列，错分到“退款”队列代价最高。主指标选什么？",
+    "en-US": "A support triage model routes tickets to 12 queues; misrouting into “refunds” is the costliest error. Which primary metric?"
+  },
+  "scenario": {
+    "zh-CN": "各队列样本量差异很大。",
+    "en-US": "Queue sizes differ widely."
+  },
+  "options": [
+    {
+      "id": "costweighted",
+      "text": {
+        "zh-CN": "按错分代价加权的错误率，并单列“退款”的精确率",
+        "en-US": "Cost-weighted error, with refund-queue precision reported separately"
+      },
+      "correct": true,
+      "why": {
+        "zh-CN": "指标要反映决策的代价结构；最贵的错误要单独看。",
+        "en-US": "The metric should reflect the cost structure; the costliest error gets its own number."
+      }
+    },
+    {
+      "id": "accuracy",
+      "text": {
+        "zh-CN": "整体准确率",
+        "en-US": "Overall accuracy"
+      },
+      "correct": false,
+      "why": {
+        "zh-CN": "样本不均衡时，准确率会被大队列主导，掩盖退款错分。",
+        "en-US": "With imbalanced queues, accuracy is dominated by large queues and hides refund errors."
+      }
+    },
+    {
+      "id": "macro",
+      "text": {
+        "zh-CN": "宏平均 F1",
+        "en-US": "Macro F1"
+      },
+      "correct": false,
+      "why": {
+        "zh-CN": "宏平均对所有队列一视同仁，没有体现代价差异。",
+        "en-US": "Macro averaging weights every queue equally, ignoring the cost differences."
+      }
+    }
+  ],
+  "multi": false,
+  "explanation": {
+    "zh-CN": "从决策的代价出发选指标，而不是从习惯出发。",
+    "en-US": "Choose metrics from the decision's costs, not from habit."
+  },
+  "hints": [
+    {
+      "zh-CN": "哪种错误最贵？指标能看见它吗？",
+      "en-US": "Which error costs most, and does the metric see it?"
+    }
+  ]
+}

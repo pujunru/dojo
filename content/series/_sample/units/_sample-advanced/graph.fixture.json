@@ -1,0 +1,131 @@
+{
+  "version": "fixture-advanced-1",
+  "tiers": [
+    {
+      "id": "_t-sample-advanced",
+      "title_zh": "进阶示例层",
+      "title_en": "Advanced sample tier",
+      "order": 100
+    }
+  ],
+  "units": [
+    {
+      "id": "_sample-advanced",
+      "tier": "_t-sample-advanced",
+      "order": 1,
+      "title_zh": "进阶题型示例单元",
+      "title_en": "Advanced item types sample unit",
+      "goal_zh": "refactor、write-tests、review、ladder 各一道，用于 Storybook 与端到端测试；不进入生产构建。",
+      "goal_en": "One refactor, write-tests, review and ladder item for Storybook and end-to-end app testing; never in a production build.",
+      "prereqUnits": [],
+      "kcs": [
+        "_adv-bank-ledger",
+        "_adv-extension-axis",
+        "_adv-top-k-ties",
+        "_adv-mutation-thinking",
+        "_adv-scheduled-events",
+        "_adv-review-hygiene"
+      ],
+      "lessons": [
+        {
+          "id": "_adv-l1",
+          "title_zh": "扩展、测试与审查",
+          "title_en": "Extend, test and review",
+          "minutes": 30,
+          "kcs": [
+            "_adv-bank-ledger",
+            "_adv-extension-axis",
+            "_adv-top-k-ties",
+            "_adv-mutation-thinking",
+            "_adv-scheduled-events",
+            "_adv-review-hygiene"
+          ],
+          "itemTypes": [
+            "refactor",
+            "write-tests",
+            "review",
+            "ladder"
+          ]
+        }
+      ],
+      "checkpoint": {
+        "type": "ladder",
+        "ref": "dj-sample-adv-ladder-icf-bank",
+        "minutes": 35
+      },
+      "exit": []
+    }
+  ],
+  "kcs": [
+    {
+      "id": "_adv-bank-ledger",
+      "title_zh": "账本不变量（原子转账）",
+      "title_en": "Ledger invariants (atomic transfer)",
+      "area": "state",
+      "prereqs": [],
+      "itemTypes": [
+        "refactor",
+        "ladder"
+      ],
+      "payoff": []
+    },
+    {
+      "id": "_adv-extension-axis",
+      "title_zh": "沿扩展轴吸收新需求",
+      "title_en": "Absorbing a new requirement along the extension axis",
+      "area": "design",
+      "prereqs": [],
+      "itemTypes": [
+        "refactor"
+      ],
+      "payoff": []
+    },
+    {
+      "id": "_adv-top-k-ties",
+      "title_zh": "Top-K 与并列排序",
+      "title_en": "Top-K with tie-breaking",
+      "area": "py",
+      "prereqs": [],
+      "itemTypes": [
+        "write-tests",
+        "ladder"
+      ],
+      "payoff": []
+    },
+    {
+      "id": "_adv-mutation-thinking",
+      "title_zh": "按变异体写边界测试",
+      "title_en": "Boundary tests that kill mutants",
+      "area": "test",
+      "prereqs": [],
+      "itemTypes": [
+        "write-tests"
+      ],
+      "payoff": []
+    },
+    {
+      "id": "_adv-scheduled-events",
+      "title_zh": "定时事件与假时钟",
+      "title_en": "Scheduled events on a fake clock",
+      "area": "state",
+      "prereqs": [],
+      "itemTypes": [
+        "review",
+        "ladder"
+      ],
+      "payoff": []
+    },
+    {
+      "id": "_adv-review-hygiene",
+      "title_zh": "审查：异常与可变状态",
+      "title_en": "Review: exceptions and mutable state",
+      "area": "repo",
+      "prereqs": [],
+      "itemTypes": [
+        "review"
+      ],
+      "payoff": []
+    }
+  ],
+  "coverage": []
+}
